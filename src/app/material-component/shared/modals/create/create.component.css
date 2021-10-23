@@ -1,0 +1,24 @@
+.dropdn {
+  background: #fff !important;
+  color: #666 !important;
+  border-color: #c6d2d9 !important;
+  padding: 8.65px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn-border {
+  border: 1px solid transparent;
+}
+
+/* ::ng-deep.mat-form-field-flex{
+  background: #fff !important;
+  color: #666 !important;
+  border-color: #c6d2d9 !important;
+  padding: 8.65px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */

@@ -1,0 +1,157 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<div *ngIf="totalData">
+<div class="row ml-1" *ngIf="totalData">
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-blue order-card">
+      <div class="card-block">
+        <h6 class="m-b-20">Total Payment</h6>
+        <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>{{totalData.totalPayment | currency : 'INR'}}</span></h2>
+        <p>{{totalData.totalPaymentInWords}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-green order-card">
+      <div class="card-block">
+        <h6 class="m-b-20">Total Sales</h6>
+        <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>{{totalData.totalSales | currency : 'INR'}}</span></h2>
+        <p>{{totalData.totalSalesInWords}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-pink order-card">
+      <div class="card-block">
+        <h6 class="m-b-20">Total Dues</h6>
+        <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>{{totalData.totalDues | currency : 'INR'}}</span></h2>
+        <p>{{totalData.totalDuesInWords}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-yellow order-card">
+      <div class="card-block">
+        <h6 class="m-b-20">Total Expenses</h6>
+        <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>{{0 | currency : 'INR'}}</span></h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-2 ml-2">
+  <div class="col-sm-1">
+    <button mat-raised-button [ngClass]="{'btn-primary': dateType === 'daily'}" (click)="getDayWiseData(preDefinedDateObj)">Daily</button>
+  </div>
+  <div class="col-sm-1">
+    <button mat-raised-button [ngClass]="{'btn-primary': dateType === 'monthly'}" (click)="getMonthlyData()">Monthly</button>
+  </div>
+</div>
+
+<div class="row ml-1 mb-2">
+  <div class="col-sm-3 mt-2" *ngIf="dateType === 'daily'">
+    <input  type="text" class="form-control" placeholder="Date From - To" bsDaterangepicker                       
+    (bsValueChange)="datepickerValueChange($event)"
+    [maxDate]="datepickerMaxDate"
+    [bsConfig]="datepickerConfig" style="min-height: 30px;  line-height: 1rem; font-size: .9rem; height: 34px; border-width: 2px;">
+    <!-- <mat-form-field appearance="outline">
+      <input matInput [bsValue]="setDateValue" placeholder="Date From - To" bsDaterangepicker (bsValueChange)="datepickerValueChange($event)"
+      [bsConfig]="datepickerConfig">
+    </mat-form-field> -->
+  </div>
+ 
+  <div class="col-sm-4">
+    <mat-form-field appearance="outline">
+      <mat-label style="padding: 12px;">Select Customer</mat-label>
+      <mat-select formControlName="customer_uuid" multiple (selectionChange)="getCustomerMonthlyData($event, 'customer_uuid')">
+          <div class="form-group" style="padding: 8px;">
+              <input type="text" class="form-control" (keyup)="onKey($event)"  placeholder="Find Customer">
+          </div>
+          
+          <mat-option  *ngFor="let customer of customerData | search : {query:query, field: 'name'}" [value]="customer.uuid">
+          {{customer.name}} - {{customer.area}} 
+          </mat-option>
+      </mat-select>
+      </mat-form-field>
+  </div>
+  <div class="col-sm-4">
+    <mat-form-field appearance="outline">
+      <mat-label style="padding: 12px;">Select Place</mat-label>
+      <mat-select formControlName="customer_uuid" multiple (selectionChange)="getCustomerMonthlyData($event, 'place_uuid')">  
+          <mat-option  *ngFor="let place of placeData" [value]="place.uuid">
+          {{place.name}} 
+          </mat-option>
+      </mat-select>
+      </mat-form-field>
+  </div>
+</div>
+
+<div fxLayout="row" *ngIf="dateType === 'daily'">
+  <div class="table-responsive ml-3">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <!-- <th scope="col"></th> -->
+        <th scope="col">Date</th>
+        <th scope="col">Payment</th>
+        <th scope="col">Bill</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of dataSource;let i = index">
+        <!-- <th scope="row">{{i + 1}}</th> -->
+        <td *ngIf="row.payment_date !== 'Total'">{{row.payment_date | date: commonService.dateFormat}}</td>
+        <td *ngIf="row.payment_date === 'Total'"><b style="font-size: 1.5rem;">{{row.payment_date}}</b></td>
+        <td matTooltip="click to see all payments" class="cursor-pointer" (click)="showFullData(row, '/payment')">{{row.totalPaymentAmount | currency: 'INR' }}</td>
+        <td matTooltip="click to see all bills" class="cursor-pointer" (click)="showFullData(row, '/bill')">{{row.totalBillAmount | currency: 'INR'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<div fxLayout="row" *ngIf="dateType === 'monthly'">
+  <div class="table-responsive ml-3">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <!-- <th scope="col"></th> -->
+        <th scope="col">Month</th>
+        <th scope="col">Payment</th>
+        <th scope="col">Bill</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of monthlyData;let i = index">
+        <!-- <th scope="row">{{i + 1}}</th> -->
+        <td>{{row.month}}</td>
+        <td>{{row.payment_amount | currency: 'INR' }}</td>
+        <td>{{row.bill_amount | currency: 'INR' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<div fxLayout="row">
+  <!-- column -->
+  <div fxFlex.gt-lg="66" fxFlex.gt-md="66" fxFlex.gt-xs="100" fxFlex="100">
+
+    <app-sales-overview-grap></app-sales-overview-grap>
+
+  </div>
+  <!-- column -->
+  <!-- column -->
+  <div fxFlex.gt-lg="33" fxFlex.gt-md="33" fxFlex.gt-xs="100" fxFlex="100">
+
+    <app-visiter-graph></app-visiter-graph>
+
+  </div>
+  <!-- column -->
+</div>
+
+</div>

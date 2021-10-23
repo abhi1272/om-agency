@@ -1,0 +1,50 @@
+<!-- ============================================================== -->
+<!-- sidebar -->
+<!-- ============================================================== -->
+ <div class="user-profile">
+    <!-- User profile image -->
+    <div class="profile-img"> <img src="assets/images/users/profile.png" alt="user"> </div>
+    <!-- User profile text-->
+    <!-- ============================================================== -->
+    <!-- Profile - style you can find in header.scss -->
+    <!-- ============================================================== -->
+    <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class=""> {{user.firstName}} {{user.lastName}}<i class="ti-angle-down font-12 m-l-5"></i></a></div>
+    <mat-menu #sdprofile="matMenu" class="mymegamenu">
+        <button mat-menu-item>
+            <mat-icon>settings</mat-icon> Settings </button>
+        <button mat-menu-item>
+            <mat-icon>account_box</mat-icon> Profile </button>
+        <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon> Disable notifications </button>
+        <button mat-menu-item>
+            <mat-icon>exit_to_app</mat-icon> Sign Out </button>
+    </mat-menu>
+
+</div>
+<mat-nav-list appAccordion>
+    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem(); let i = index" routerLinkActive="selected" group="{{menuitem.state}}">
+        <a appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link' && !menuitem.subMenu">
+            <mat-icon>{{ menuitem.icon }}</mat-icon>
+            <span>{{ menuitem.name }}</span>
+            <span fxFlex></span>
+            <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+        </a>
+        <a appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.subMenu" (click)="toggleMenu(i)">
+            <mat-icon>{{ menuitem.icon }}</mat-icon>
+            <span>{{ menuitem.name }}</span>
+            <mat-icon *ngIf="!showSubMenu">chevron_right</mat-icon>
+            <mat-icon *ngIf="showSubMenu && currentIndex === i">expand_more</mat-icon>
+        </a>
+        <mat-nav-list appAccordion *ngIf="showSubMenu && currentIndex === i">
+            <mat-list-item appAccordionLink *ngFor="let subMenuitem of menuitem.subMenu" routerLinkActive="selected"
+                group="{{subMenuitem.state}}">
+                <a appAccordionToggle [routerLink]="['/', subMenuitem.state]" *ngIf="subMenuitem.type === 'link'">
+                    <mat-icon>{{ subMenuitem.icon }}</mat-icon>
+                    <span>{{ subMenuitem.name }}</span>
+                    <span fxFlex></span>
+                    <span class="label label-{{ badge.type }}" *ngFor="let badge of subMenuitem.badge">{{ badge.value }}</span>
+                </a>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-list-item>
+</mat-nav-list>

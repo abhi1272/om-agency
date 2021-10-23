@@ -1,0 +1,35 @@
+<div fxLayout="row">
+    <div fxFlex.gt-sm="100%" class="mt-5">
+        <mat-card class="w-50 m-auto bg-light">
+            <mat-card-header>
+              <mat-card-title>Register</mat-card-title>
+            </mat-card-header>
+            <form [formGroup]="registerForm" class="example-form" (ngSubmit)="onSubmit()">
+                <mat-card-content>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="First name" formControlName="firstName" name="firstName" required>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Last name" formControlName="lastName" name="lastName" required>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Email" formControlName="email" name="email" type="email" required>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Mobile number" formControlName="mobileNumber" name="mobileNumber" required>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Organization name" formControlName="organizations" name="organizations" required>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Password" type="password" formControlName="password" name="password" required>
+                    </mat-form-field>
+                <!-- <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner> -->
+                </mat-card-content>
+                <mat-card-actions>
+                        <button type="submit" mat-raised-button class="text-center" color="primary">Register</button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+    </div>
+</div>
