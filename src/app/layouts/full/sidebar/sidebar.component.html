@@ -29,7 +29,7 @@
             <span fxFlex></span>
             <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
         </a>
-        <a appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.subMenu" (click)="toggleMenu(i)">
+        <a appAccordionToggle *ngIf="menuitem.subMenu" (click)="toggleMenu(i)">
             <mat-icon>{{ menuitem.icon }}</mat-icon>
             <span>{{ menuitem.name }}</span>
             <mat-icon *ngIf="!showSubMenu">chevron_right</mat-icon>

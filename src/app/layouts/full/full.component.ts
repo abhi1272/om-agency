@@ -1,6 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component,OnDestroy,AfterViewInit} from '@angular/core';
-import { UsersService } from 'app/material-component/services/users.service';
+import { UsersService } from 'app/core/services/users.service';
 import { MenuItems } from '../../shared/menu-items/menu-items';
 
 

@@ -1,9 +1,9 @@
-import { Routes } from '@angular/router';
-import { AuthGuard } from './guard/auth.guard';
+import { Routes } from '@angular/router'
+import { AuthGuard } from './guard/auth.guard'
 
-import { FullComponent } from './layouts/full/full.component';
-import { LoginComponent } from './material-component/components/users/login/login.component';
-import { RegisterComponent } from './material-component/components/users/register/register.component';
+import { FullComponent } from './layouts/full/full.component'
+import { LoginComponent } from './core/components/users/login/login.component'
+import { RegisterComponent } from './core/components/users/register/register.component'
 
 export const AppRoutes: Routes = [
   {
@@ -18,7 +18,7 @@ export const AppRoutes: Routes = [
       {
         path: '',
         loadChildren:
-          () => import('./material-component/material.module').then(m => m.MaterialComponentsModule),
+          () => import('./core/core.module').then(m => m.CoreModule),
         canActivateChild: [AuthGuard]
       },
       {
@@ -36,4 +36,4 @@ export const AppRoutes: Routes = [
     path: 'register',
     component: RegisterComponent
   }
-];
+]

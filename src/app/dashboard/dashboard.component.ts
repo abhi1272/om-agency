@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { CommonService } from 'app/material-component/services/common.service'
+import { CommonService } from 'app/core/services/common.service'
 import * as moment from 'moment'
 
 import {DashboardService} from './services/dashboard.service'

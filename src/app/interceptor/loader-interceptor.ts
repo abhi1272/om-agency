@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpResponse, HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http'
 import { Observable } from 'rxjs'
-import { LoaderService } from '../material-component/services/loader.service'
+import { LoaderService } from '../core/services/loader.service'
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {

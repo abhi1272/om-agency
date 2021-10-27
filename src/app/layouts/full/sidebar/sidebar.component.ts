@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MenuItems } from '../../../shared/menu-items/menu-items';
-import { UsersService } from 'app/material-component/services/users.service';
+import { UsersService } from 'app/core/services/users.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -11,7 +11,7 @@ export class AppSidebarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
   user: any
   showSubMenu = false
-  currentIndex
+  currentIndex: any
 
 
   private _mobileQueryListener: () => void;
@@ -33,7 +33,7 @@ export class AppSidebarComponent implements OnDestroy {
   }
 
 
-  toggleMenu(index) {
+  toggleMenu(index: any) {
     this.currentIndex = index
     this.showSubMenu = !this.showSubMenu
  }

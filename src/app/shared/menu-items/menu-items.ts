@@ -21,6 +21,7 @@ const MENUITEMS = [
     { state: 'payment', name: 'Payment', type: 'link', icon: 'payment' },
   ] },
   { state: 'expense', name: 'Expense', type: 'link', icon: 'money' },
+  { state: 'table', name: 'Table', type: 'link', icon: 'store' }
 ]
 
 @Injectable()

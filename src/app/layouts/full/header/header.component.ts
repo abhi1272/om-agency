@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UsersService } from 'app/material-component/services/users.service';
+import { UsersService } from 'app/core/services/users.service';
 
 @Component({
   selector: 'app-header',

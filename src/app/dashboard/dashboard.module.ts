@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { DemoMaterialModule } from '../demo-material-module';
+// import { DemoMaterialModule } from '../demo-material-module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutes } from './dashboard.routing';
@@ -13,12 +13,14 @@ import { ContactsComponent } from './dashboard-components/contacts/contacts.comp
 import { ActivityComponent } from './dashboard-components/activity/activity.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker'
-import {SearchPipe} from '../material-component/shared/search.pipe'
+import {SearchPipe} from '../core/shared/search.pipe'
+import { AngularMaterialModule } from 'app/shared/angular-material.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    DemoMaterialModule,
+    // DemoMaterialModule,
+    AngularMaterialModule,
     FlexLayoutModule,
     ChartistModule,
     NgxChartsModule,
