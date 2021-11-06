@@ -24,6 +24,10 @@ export class CommonService {
     return dialogRef.afterClosed()
   }
 
+  createTable(data): Observable<any> {
+    return this.http.post(`${this.apiUrl}/createTable`, data)
+  }
+
   // CRUD
 
   getEntityData(entityName: string): Observable<any> {

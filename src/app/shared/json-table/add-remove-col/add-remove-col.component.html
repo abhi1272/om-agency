@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row">
+        <mat-form-field class="col-sm-10">
+            <mat-select placeholder="Create Your Table" [formControl]="fieldNames" multiple
+                [(ngModel)]="selectedValues">
+                <mat-option *ngFor="let fieldName of filterColumnsV1" [value]="fieldName.key" selected>
+                    {{fieldName.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="col-sm-2" *ngIf="this.sharedService.previousUrlData && this.sharedService.previousUrlData.url.length > 0">
+            <button mat-raised-button mat-button-base matTooltip="Dowload {{roleName}} file"
+                aria-label="Button that displays a tooltip when focused or hovered over" (click)="Dowload()"> <i
+                    class="fa fa-download" aria-hidden="true"></i></button>
+        </div>
+    </div>
+</div>

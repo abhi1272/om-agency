@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row" *ngIf="!sharedService.previousFilter">
+        <div class="col-sm-6" >
+            <mat-form-field>
+                <mat-select placeholder="Select Fields" [formControl]="fieldNames" [(ngModel)]="singleInputValue">
+                    <div *ngIf="fieldNames">
+                    </div>
+                    <mat-option *ngFor="let fieldName of filterColumns" [value]="fieldName.label">{{fieldName.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-10"></div>
+                <div class="col-sm-2">
+                    <button mat-raised-button mat-button-base   matTooltip="Dowload {{roleName}} file"
+                    aria-label="Button that displays a tooltip when focused or hovered over"
+                    (click)="Dowload()"> <i class="fa fa-download"
+                            aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="filter-input-view" *ngFor="let checkedCol of sharedService.checkedColumns">
+        <div class="row" *ngIf="checkedCol.data_type==='number'">
+            <mat-form-field class="col-sm-4">
+                <mat-label>Select an option</mat-label>
+                <mat-select [(value)]="selected">
+                    <mat-option *ngFor="let option of options" value="{{option.name}}">{{option.label}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="example-full-width col-sm-4">
+                <input matInput placeholder="Enter {{checkedCol.label}}" type="number" [(ngModel)]="checkedCol.val" #amount>
+            </mat-form-field>
+            <div class="col-sm-2 mt-2">
+                <button mat-flat-button color="primary" (click)="getData(amount,checkedCol,null)">Submit</button>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+        <div *ngIf="checkedCol.data_type === 'date'" class="row mr-2">
+            <mat-form-field class="col-sm-5">
+                <mat-label>From date</mat-label>
+                <input matInput [matDatepicker]="fromDate">
+                <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                <mat-datepicker #fromDate></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="col-sm-5">
+                <mat-label>To date</mat-label>
+                <input matInput [matDatepicker]="toDate" [min]="fromDate._selected">
+                <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                <mat-datepicker #toDate></mat-datepicker>
+              </mat-form-field>
+              <div class="col-sm-2 mt-2">
+                <button class="mr-1" [disabled]="!fromDate._selected || !toDate._selected" mat-flat-button color="primary" (click)="getData(fromDate._selected,checkedCol,toDate._selected)">Submit</button>
+            </div>
+        </div>
+        <div *ngIf="checkedCol.data_type !=='number' && checkedCol.data_type !== 'date'">
+            <div *ngIf="checkedCol.values">
+                <mat-form-field>
+                    <mat-label>Select {{checkedCol.label}}</mat-label>
+                    <mat-select [(ngModel)]="checkedCol.val">
+                        <mat-option *ngFor="let checkedVal of checkedCol.values" (click)="getData(checkedCol,checkedCol,null)" [value]="checkedVal.label" selected>{{checkedVal.value}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div *ngIf="!checkedCol.values">
+                <mat-form-field class="example-full-width col-sm">
+                    <input matInput placeholder="Enter {{checkedCol.label}}" [(ngModel)]="checkedCol.val" (keyup)="getData($event,checkedCol,null)">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!sharedService.previousFilter || filteredDataCount">
+        {{sharedService.filterDataCountDisplay}} {{this.sharedService.roleName}}(s) found from the search
+    </div>
+</div>
+
+<!-- <hr> -->

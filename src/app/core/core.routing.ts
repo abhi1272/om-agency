@@ -46,6 +46,10 @@ export const CoreRoutes: Routes = [
     component: ExpenseComponent
   },
   {
+    path: 'entity/:name',
+    component: ExpenseComponent
+  },
+  {
     path: 'table',
     component: CreateTableComponent
   }

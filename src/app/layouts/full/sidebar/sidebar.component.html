@@ -23,7 +23,7 @@
 </div>
 <mat-nav-list appAccordion>
     <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem(); let i = index" routerLinkActive="selected" group="{{menuitem.state}}">
-        <a appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link' && !menuitem.subMenu">
+        <a appAccordionToggle [routerLink]="[menuitem.state]" *ngIf="menuitem.type === 'link' && !menuitem.subMenu">
             <mat-icon>{{ menuitem.icon }}</mat-icon>
             <span>{{ menuitem.name }}</span>
             <span fxFlex></span>

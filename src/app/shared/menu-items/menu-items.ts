@@ -20,7 +20,8 @@ const MENUITEMS = [
     { state: 'bill', name: 'Bill', type: 'link', icon: 'receipt' },
     { state: 'payment', name: 'Payment', type: 'link', icon: 'payment' },
   ] },
-  { state: 'expense', name: 'Expense', type: 'link', icon: 'money' },
+  { state: 'entity/expense', name: 'Expense', type: 'link', icon: 'money' },
+  { state: 'entity/hare', name: 'Hare', type: 'link', icon: 'money' },
   { state: 'table', name: 'Table', type: 'link', icon: 'store' }
 ]
 

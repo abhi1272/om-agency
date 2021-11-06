@@ -1,0 +1,38 @@
+<div mat-dialog-title>
+  Upload Prescription
+</div>
+
+
+<div class="main" mat-dialog-content>
+  <div class="row">
+    <div class="col-sm-5">
+      <div>
+        <img src="../../../../assets/img/dwd.png" alt="">
+      </div>
+      <input type="file" accept=".jpg,.png,.jpeg" id="image-input" (change)="selectFile($event)">
+    </div>
+    <div class="col-sm-7">
+      <img class="mb-2" src="../../../../assets/img/prescription.png" style="width: 14vw;height: 14vw;margin-left: 4vw;">
+      <ul>
+        <li>Ensure that the picture or scan is such that the entire prescription
+          is visible (including the Doctor/Clinic's)
+        </li>
+        <li>
+          Ensure that the picture is taken in a way that the handwriting is visible
+          clearly.
+        </li>
+        <li>
+          The file size should not exceed 5 MB.
+        </li>
+        <li>
+          You can upload 2 prescription per order.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" (click)="addPrescription()" [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

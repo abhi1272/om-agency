@@ -1,0 +1,169 @@
+<div mat-dialog-title *ngIf="data.data.config && data.data.config.page_key !== 'confirm'">
+  <div class="row">
+    <div class="col-xs-12">
+      <strong class="text-center">{{data.action}} {{data.data.config.page_name}}</strong>
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-content *ngIf="data.data.config && data.data.config.page_key === 'medicine'">
+  <form [formGroup]="createForm">
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Placeholder" formControlName="medicine_name">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Composition</mat-label>
+        <input matInput placeholder="Placeholder" formControlName="composition">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Manufacturer</mat-label>
+        <input matInput placeholder="Placeholder" formControlName="manufacturer">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>MRP</mat-label>
+        <input matInput placeholder="Placeholder" formControlName="MRP">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Best Price</mat-label>
+        <input matInput placeholder="Placeholder" formControlName="best_price">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let entity of entities" [value]="entity.name">{{entity.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="row">
+        <label class="ml-3 col-sm-4 col-form-label">IMAGE:</label>
+        <input type="file" class="form-control col-sm-6 mb-4" name="image" (change)="selectFile($event)" accept=".jpg,.png,.jpeg,.webp" />
+      </div>
+      <div class="row">
+        <label class="ml-3 col-sm-4 col-form-label">DESCRIPTION:</label>
+        <input type="text" class="form-control col-sm-6 mb-4" formControlName="description">
+      </div>
+      <div class="row">
+        <label class="ml-3 col-sm-4 col-form-label">BENEFITS:</label>
+        <input type="text" class="form-control col-sm-6 mb-4" formControlName="benefits"
+          placeholder="Add multiple data with comma separated">
+      </div>
+
+    </div>
+    <div align=end>
+      <button mat-raised-button mat-dialog-close>Cancel</button>
+      <button mat-raised-button color="primary"
+        type="submit" (click)="submit()" class="mr-4 ml-4 mb-2">Save</button>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-content *ngIf="data.data.config && data.data.config.page_key === 'user'">
+  <form [formGroup]="createForm">
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Placeholder" formControlName="firstName">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Placeholder" formControlName="lastName">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Placeholder" formControlName="email">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Select Role</mat-label>
+        <mat-select formControlName="roleId">
+          <mat-option *ngFor="let role of entities" [value]="role.uuid">{{role.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div align=end>
+      <button mat-raised-button mat-dialog-close (click)="cancel()">Cancel</button>
+      <button mat-raised-button color="primary" type="submit" (click)="submit()" class="mr-4 ml-4 mb-2">Save</button>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-content *ngIf="data.data.config && data.data.config.page_key === 'pharmacist'">
+  <form [formGroup]="createForm">
+    <div class="form-group">
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-sm-6">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Placeholder" formControlName="name">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-sm-12">
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Placeholder" formControlName="address">
+        </mat-form-field>
+      </div>
+    </div>
+    <div align=end>
+      <button mat-raised-button mat-dialog-close (click)="cancel()">Cancel</button>
+      <button mat-raised-button color="primary" type="submit" (click)="submit()" class="mr-4 ml-4 mb-2">Save</button>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-content *ngIf="data.data.config && data.data.config.page_key === 'role'">
+  <form [formGroup]="createForm">
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Placeholder" formControlName="name">
+      </mat-form-field>
+      <!-- <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Page</mat-label>
+        <input matInput placeholder="Placeholder" formControlName="page">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Access</mat-label>
+        <input matInput placeholder="Placeholder" formControlName="method">
+      </mat-form-field> -->
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Access All</mat-label>
+        <mat-select formControlName="canAccessAll">
+          <mat-option [value]="true">yes</mat-option>
+          <mat-option [value]="false">No</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div align=end>
+      <button mat-raised-button mat-dialog-close (click)="cancel()">Cancel</button>
+      <button mat-raised-button color="primary" type="submit" (click)="submit()" class="mr-4 ml-4 mb-2">Save</button>
+    </div>
+  </form>
+</div>
+<div mat-dialog-content *ngIf="data.data.config && data.data.config.page_key === 'category'">
+  <form [formGroup]="createForm">
+    <div class="form-group">
+      <mat-form-field appearance="outline" class="col-sm-6">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Placeholder" formControlName="name">
+      </mat-form-field>
+
+    </div>
+    <div align=end>
+      <button mat-raised-button mat-dialog-close (click)="cancel()">Cancel</button>
+      <button mat-raised-button color="primary" type="submit" (click)="submit()" class="mr-4 ml-4 mb-2">Save</button>
+    </div>
+  </form>
+</div>
+<div mat-dialog-content *ngIf="data.data.config && data.data.config.page_key === 'confirm'">
+  <form>
+    <div class="form-group">
+      Do you sure, you want to delete {{data.page}}?
+    </div>
+    <div align=end>
+      <button mat-raised-button mat-dialog-close (click)="cancel()">Cancel</button>
+      <button mat-raised-button color="primary" type="submit" (click)="confirm()" class="mr-4 ml-4 mb-2">OK</button>
+    </div>
+  </form>
+</div>

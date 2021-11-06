@@ -28,7 +28,7 @@ import { ErrorInterceptor } from './interceptor/error.interceptor'
 import { LoaderInterceptor } from './interceptor/loader-interceptor'
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { environment } from '../environments/environment'
-import { AngularMaterialModule } from './shared/angular-material.module'
+import { AngularMaterialModule } from './shared/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,7 @@ import { AngularMaterialModule } from './shared/angular-material.module'
     AppSidebarComponent,
     LoginComponent,
     RegisterComponent,
-    HttpLoaderComponent,
+    HttpLoaderComponent
   ],
   imports: [
     BrowserModule,
