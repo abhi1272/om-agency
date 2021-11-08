@@ -124,7 +124,7 @@ export class CustomerComponent implements OnInit {
     const value = this.commonService.openDialog(CreateComponent, createModalObj, )
     value.subscribe((data) => {
       if (data) {
-        // this.getCustomerData();
+        this.getCustomerData()
       }
     })
   }

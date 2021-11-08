@@ -120,7 +120,7 @@ export class CreateComponent implements OnInit {
       this.createForm.value.bill_date = this.covertDateIntoTimeStamp(this.createForm.value.bill_date)
     }
     this.commonService.addEntityData(this.data.page, this.createForm.value).subscribe((data) => {
-      this.toast.success('successfully added')
+      this.toast.success(`${this.data.page} successfully added`)
       this.loading = true
       this.dialogRef.close(true)
     }, (error) => {
