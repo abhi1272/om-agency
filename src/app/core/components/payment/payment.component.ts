@@ -125,7 +125,7 @@ export class PaymentComponent implements OnInit {
       })
     } else if (this.selectedDate) {
       this.billService.getPaymentsByDate(this.selectedDate).subscribe((data) => {
-        this.storedData = data.data
+        this.storedData = data
         this.storedData = this.storedData.filter((pay: { customer: { type: string } }) => pay.customer.type !== 'company')
         this.totalAmount = data.totalAmount
         this.storedData = this.storedData.sort((a: any, b: any) => {
@@ -163,7 +163,7 @@ export class PaymentComponent implements OnInit {
       title: `Add Payment`,
       pages: 'payment',
       action: 'create',
-      data: {uuid: this.customerUuid}
+      data: {customer_uuid: this.customerUuid}
     }
     const value = this.commonService.openDialog(CreateComponent, createModalObj)
     value.subscribe((data) => {

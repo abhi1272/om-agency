@@ -95,9 +95,17 @@ export class CreateComponent implements OnInit {
 
   createData(): void {
     this.loading = true
-    if (this.data.data.page !== 'customer') {
+    if (this.data.pages === 'customer') {
       this.createForm.value.customer_uuid = this.data.data.uuid
     }
+    if (this.data.data && this.data.data.customer_uuid) {
+      this.createForm.value.customer_uuid = this.data.data.customer_uuid
+    }
+
+    if (this.data.data && this.data.data.bill_uuid) {
+      this.createForm.value.bill_uuid = this.data.data.bill_uuid
+    }
+
 
     if (this.data.page === 'company') {
       this.createForm.value.type = 'company'

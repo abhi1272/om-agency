@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator'
 import { Router } from '@angular/router'
 import { CommonService } from '../../services/common.service'
 import { CreateComponent } from 'app/core/shared/modals/create/create.component'
+import { ToastrService } from 'ngx-toastr'
 // import jsPDF from 'jspdf'
 // import jsPDF = require('jspdf') // // typescript without esModuleInterop flag
 // import jsPDF from 'yworks-pdf' // using yworks fork
@@ -18,7 +19,7 @@ import { CreateComponent } from 'app/core/shared/modals/create/create.component'
 })
 export class CustomerComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'area', 'place' , 'totalBillAmount', 'totalBillAmountLeft', 'addBill', 'viewBill' , 'addPayment', 'viewPayment', 'edit']
+  displayedColumns: string[] = ['id', 'name', 'area', 'place' , 'totalBillAmount', 'totalBillAmountLeft', 'addBill', 'viewBill' , 'addPayment', 'viewPayment', 'edit', 'delete']
   dataSource!: MatTableDataSource<any>
   storeData: any = []
   totalSale = 0
@@ -35,7 +36,8 @@ export class CustomerComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private commonService: CommonService
+    private commonService: CommonService,
+    public toast: ToastrService
   ) { }
 
   ngOnInit() {
@@ -63,7 +65,7 @@ export class CustomerComponent implements OnInit {
       this.storeData = data.data
       this.loading = false
       this.storeData.map((item: any) => {
-        item.totalBillAmountLeft = item.totalBillAmount - item.totalPaymentAmount
+        item.totalBillAmountLeft = (item.totalBillAmount - item.totalPaymentAmount) || 0
       })
       this.filterByPlace([])
       this.dataSource = new MatTableDataSource(this.storeData)
@@ -115,7 +117,7 @@ export class CustomerComponent implements OnInit {
     const createModalObj: any = {
       page: 'payment',
       title: `Add Payment`,
-      pages: 'payment',
+      pages: 'customer',
       action: 'create',
       data: row
     }
@@ -131,7 +133,7 @@ export class CustomerComponent implements OnInit {
     const createModalObj = {
       page: 'bill',
       title: `Add Bill`,
-      pages: 'bill',
+      pages: 'customer',
       action: 'create',
       data: row
     }
@@ -155,6 +157,20 @@ export class CustomerComponent implements OnInit {
     value.subscribe((data) => {
       if (data) {
         this.getCustomerData()
+      }
+    })
+  }
+
+  delete(ele: any): void {
+    const value = this.commonService.openDialog(CreateComponent, { page: 'confirm'})
+    value.subscribe((data) => {
+      if (data) {
+        this.commonService.archiveData(ele.uuid, 'customer', {active: false}).subscribe(() => {
+          this.toast.success('Customer deleted successfully')
+          this.getCustomerData()
+        }, (error) => {
+          this.toast.error(error)
+        })
       }
     })
   }

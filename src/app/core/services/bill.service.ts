@@ -20,7 +20,7 @@ export class BillService {
   }
 
   getPaymentsByDate(date: any): Observable<any> {
-    return this.http.get(`${this.apiUrl}/pay/?payment_date=${date}`)
+    return this.http.get(`${this.apiUrl}/payment?payment_date=${date}`)
   }
 
   getBillsByDate(date: any): Observable<any> {

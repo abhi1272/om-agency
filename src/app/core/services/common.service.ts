@@ -58,6 +58,10 @@ export class CommonService {
   updateData(uuid: string, entity: string, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/crud/${entity}/${uuid}`, data)
   }
+
+  archiveData(uuid: string, entity: string, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${entity}/${uuid}`, data)
+  }
 }
 
 

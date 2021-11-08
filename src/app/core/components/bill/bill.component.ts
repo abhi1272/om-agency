@@ -17,7 +17,7 @@ import * as moment from 'moment'
 })
 export class BillComponent implements OnInit {
 
-  displayedColumns: string[] = ['select' , 'id', 'bill_no', 'bill_amount', 'customer_name' , 'place', 'date', 'bill_amount_left', 'edit', 'delete']
+  displayedColumns: string[] = ['select' , 'id', 'bill_no', 'bill_amount', 'customer_name' , 'place', 'date', 'bill_amount_left', 'payment', 'edit', 'delete']
   customerUuid: any
   dataSource!: MatTableDataSource<any>
   storeData: any = []
@@ -170,6 +170,22 @@ checkboxLabel(row?: any): string {
 
   viewPaymentClickHandler(row: any): void {
     this.router.navigate([`/payment/${row.uuid}`, { page: 'bill' }])
+  }
+
+  addPayment(ele): void {
+    const createModalObj = {
+      page: 'payment',
+      title: `Add Payment`,
+      pages: 'bill',
+      action: 'create',
+      data: {bill_uuid: ele.uuid}
+    }
+    const value = this.commonService.openDialog(CreateComponent, createModalObj)
+    value.subscribe((data) => {
+      if (data) {
+        this.getBillData()
+      }
+    })
   }
 
   edit(row: any): void {
