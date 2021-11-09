@@ -19,7 +19,7 @@ import { ToastrService } from 'ngx-toastr'
 })
 export class CustomerComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'area', 'place' , 'totalBillAmount', 'totalBillAmountLeft', 'addBill', 'viewBill' , 'addPayment', 'viewPayment', 'edit', 'delete']
+  displayedColumns: string[] = ['id', 'name', 'area' , 'totalBillAmount', 'totalBillAmountLeft', 'addBill', 'viewBill' , 'addPayment', 'viewPayment', 'edit', 'delete']
   dataSource!: MatTableDataSource<any>
   storeData: any = []
   totalSale = 0
@@ -65,7 +65,7 @@ export class CustomerComponent implements OnInit {
       this.storeData = data.data
       this.loading = false
       this.storeData.map((item: any) => {
-        item.totalBillAmountLeft = (item.totalBillAmount - item.totalPaymentAmount) || 0
+        item.totalBillAmountLeft = (item.totalBillAmount - (item.totalPaymentAmount || 0))
       })
       this.filterByPlace([])
       this.dataSource = new MatTableDataSource(this.storeData)
@@ -140,7 +140,7 @@ export class CustomerComponent implements OnInit {
     const value = this.commonService.openDialog(CreateComponent, createModalObj)
     value.subscribe((data) => {
       if (data) {
-        // this.getCustomerData();
+        this.getCustomerData()
       }
     })
   }
@@ -179,8 +179,8 @@ export class CustomerComponent implements OnInit {
     this.totalSale = 0
     this.totalPaymentReceived = 0
     storeData.map((data: any) => {
-      this.totalSale += data.totalBillAmount
-      this.totalPaymentReceived += data.totalPaymentAmount
+      this.totalSale += (data.totalBillAmount || 0)
+      this.totalPaymentReceived += ( data.totalPaymentAmount || 0)
     })
   }
 

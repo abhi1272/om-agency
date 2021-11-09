@@ -72,7 +72,7 @@
       <!-- Place Column -->
       <ng-container matColumnDef="place">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> PLACE </th>
-        <td mat-cell *matCellDef="let row"> {{row.customer ? row.customer.place.name : ''}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.customer.place ? row.customer.place.name : ''}} </td>
       </ng-container>
 
       <!-- Bill Date Column -->
