@@ -69,10 +69,7 @@ export class BillComponent implements OnInit {
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value
-    const filteredData = this.storeData.filter((item: any) => {
-      return item.customer && item.customer.name.toLowerCase().includes(filterValue.toLowerCase())
-    })
-    this.dataSource = new MatTableDataSource(filteredData)
+    this.dataSource.filter = filterValue.trim().toLowerCase()
   }
  /** Whether the number of selected elements matches the total number of rows. */
  isAllSelected(): boolean {

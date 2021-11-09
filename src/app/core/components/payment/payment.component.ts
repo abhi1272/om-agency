@@ -83,10 +83,7 @@ export class PaymentComponent implements OnInit {
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value
-    const filteredData = this.storedData.filter((item: any) => {
-      return item.customer.name.toLowerCase().includes(filterValue.toLowerCase())
-    })
-    this.dataSource = new MatTableDataSource(filteredData)
+    this.dataSource.filter = filterValue.trim().toLowerCase()
   }
 
   // Get Project related functions
@@ -111,10 +108,10 @@ export class PaymentComponent implements OnInit {
       }, (error) => {
         console.log(error)
       })
-    } else if (this.customerUuid) {
-      this.billService.getPaymentsByBill(this.customerUuid, 'customer_uuid').subscribe((data) => {
+    } else if (this.selectedDate) {
+      this.billService.getPaymentsByDate(this.selectedDate).subscribe((data) => {
         this.storedData = data
-        // this.sortedData = data;
+        this.storedData = this.storedData.filter((pay: { customer: { type: string } }) => pay.customer.type !== 'company')
         this.totalAmount = data.totalAmount
         this.storedData = this.storedData.sort((a: any, b: any) => {
           return new Date(b.payment_date).getTime() - new Date(a.payment_date).getTime()
@@ -123,10 +120,10 @@ export class PaymentComponent implements OnInit {
       }, (error) => {
         console.log(error)
       })
-    } else if (this.selectedDate) {
-      this.billService.getPaymentsByDate(this.selectedDate).subscribe((data) => {
+    } else if (this.customerUuid) {
+      this.billService.getPaymentsByBill(this.customerUuid, 'customer_uuid').subscribe((data) => {
         this.storedData = data
-        this.storedData = this.storedData.filter((pay: { customer: { type: string } }) => pay.customer.type !== 'company')
+        // this.sortedData = data;
         this.totalAmount = data.totalAmount
         this.storedData = this.storedData.sort((a: any, b: any) => {
           return new Date(b.payment_date).getTime() - new Date(a.payment_date).getTime()
