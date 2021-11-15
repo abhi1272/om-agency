@@ -94,7 +94,8 @@ checkboxLabel(row?: any): string {
 }
 
   getBillData(filter?: any) {
-    if (filter) {
+    console.log('filter', filter)
+    if (filter !== undefined) {
       this.router.navigate(
         [],
         {

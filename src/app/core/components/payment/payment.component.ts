@@ -101,7 +101,7 @@ export class PaymentComponent implements OnInit {
     }
     if (this.billUuid) {
       this.billService.getPaymentsByBill(this.billUuid, 'bill_uuid').subscribe((data) => {
-        this.storedData = data
+        this.storedData = data.data
         this.totalAmount = data.totalAmount
         // this.sortedData = data;
         this.dataSource = new MatTableDataSource(this.storedData)
@@ -110,7 +110,7 @@ export class PaymentComponent implements OnInit {
       })
     } else if (this.selectedDate) {
       this.billService.getPaymentsByDate(this.selectedDate).subscribe((data) => {
-        this.storedData = data
+        this.storedData = data.data
         this.storedData = this.storedData.filter((pay: { customer: { type: string } }) => pay.customer.type !== 'company')
         this.totalAmount = data.totalAmount
         this.storedData = this.storedData.sort((a: any, b: any) => {
@@ -122,7 +122,7 @@ export class PaymentComponent implements OnInit {
       })
     } else if (this.customerUuid) {
       this.billService.getPaymentsByBill(this.customerUuid, 'customer_uuid').subscribe((data) => {
-        this.storedData = data
+        this.storedData = data.data
         // this.sortedData = data;
         this.totalAmount = data.totalAmount
         this.storedData = this.storedData.sort((a: any, b: any) => {
