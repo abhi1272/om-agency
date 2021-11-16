@@ -29,6 +29,7 @@ export class CustomerComponent implements OnInit {
   printData = []
   placeData = []
   selectedPlaceUUid = []
+  setFilterValue
   loading = false
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort
@@ -44,8 +45,14 @@ export class CustomerComponent implements OnInit {
     this.getCustomerData()
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value
+  applyFilter(event?: Event) {
+    let filterValue
+    if (!event) {
+      filterValue = this.setFilterValue
+    } else {
+      filterValue = (event.target as HTMLInputElement).value
+      this.setFilterValue = filterValue
+    }
     this.dataSource.filter = filterValue.trim().toLowerCase()
   }
 
@@ -73,6 +80,7 @@ export class CustomerComponent implements OnInit {
       this.sortedData = this.storeData.slice()
       this.printData = this.storeData.slice()
       this.getPlaceData()
+      this.applyFilter()
     }, (error) => {
       console.log(error)
     })

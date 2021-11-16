@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.preDefinedDateObj = {
-      start_date : moment().subtract(10, 'days').format('YYYY-MM-DD'),
+      start_date : moment().subtract(15, 'days').format('YYYY-MM-DD'),
       end_date : moment().format('YYYY-MM-DD')
     }
     this.getDayWiseData()

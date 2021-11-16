@@ -2,7 +2,7 @@
   <div class="row">
     <mat-form-field class="col-sm-4" appearance="outline">
       <mat-label>Search Customer</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Google" #input>
+      <input matInput [value]="setFilterValue || ''" (keyup)="applyFilter($event)" placeholder="Ex. Google" #input>
     </mat-form-field>
     <mat-form-field class="col-sm-4" appearance="outline">
       <mat-label style="padding: 12px;">Select Place</mat-label>
