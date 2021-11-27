@@ -28,7 +28,7 @@ export class BillService {
   }
 
   getPaymentALl(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/pay/`)
+    return this.http.get(`${this.apiUrl}/payment`)
   }
 
   addEntityData(entityName: string, data: any): Observable<any> {

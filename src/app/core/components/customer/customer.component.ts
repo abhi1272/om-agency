@@ -53,7 +53,7 @@ export class CustomerComponent implements OnInit {
       filterValue = (event.target as HTMLInputElement).value
       this.setFilterValue = filterValue
     }
-    this.dataSource.filter = filterValue.trim().toLowerCase()
+    this.dataSource.filter = filterValue && filterValue.trim().toLowerCase()
   }
 
   exportAsExcel() {

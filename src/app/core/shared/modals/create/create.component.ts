@@ -109,16 +109,31 @@ export class CreateComponent implements OnInit {
 
     if (this.data.page === 'company') {
       this.createForm.value.type = 'company'
-      console.log(this.createForm.value)
     }
 
     if (this.data.page === 'payment') {
       this.createForm.value.payment_date = this.covertDateIntoTimeStamp(this.createForm.value.payment_date)
-
+      const payments = `${this.createForm.value.paid_amount}`.split(',')
+      payments.map((payment) => {
+        if (!isNaN(+payment)) {
+          this.createForm.value.paid_amount = +payment
+          this.addEntityData()
+        } else {
+          this.loading = false
+          this.toast.warning('Enter amount as number')
+        }
+      })
     }
     if (this.data.page === 'bill') {
       this.createForm.value.bill_date = this.covertDateIntoTimeStamp(this.createForm.value.bill_date)
     }
+
+    if (this.data.page !== 'payment') {
+      this.addEntityData()
+    }
+  }
+
+  addEntityData(): void {
     this.commonService.addEntityData(this.data.page, this.createForm.value).subscribe((data) => {
       this.toast.success(`${this.data.page} successfully added`)
       this.loading = true

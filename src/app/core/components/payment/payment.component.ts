@@ -89,7 +89,7 @@ export class PaymentComponent implements OnInit {
   // Get Project related functions
 
   public getPaymentData(filter?: any): void {
-    if (filter) {
+    if (filter !== undefined) {
       this.router.navigate(
         [],
         {
@@ -99,16 +99,7 @@ export class PaymentComponent implements OnInit {
         })
       this.selectedDate = filter
     }
-    if (this.billUuid) {
-      this.billService.getPaymentsByBill(this.billUuid, 'bill_uuid').subscribe((data) => {
-        this.storedData = data.data
-        this.totalAmount = data.totalAmount
-        // this.sortedData = data;
-        this.dataSource = new MatTableDataSource(this.storedData)
-      }, (error) => {
-        console.log(error)
-      })
-    } else if (this.selectedDate) {
+    if (this.selectedDate) {
       this.billService.getPaymentsByDate(this.selectedDate).subscribe((data) => {
         this.storedData = data.data
         this.storedData = this.storedData.filter((pay: { customer: { type: string } }) => pay.customer.type !== 'company')
@@ -116,6 +107,15 @@ export class PaymentComponent implements OnInit {
         this.storedData = this.storedData.sort((a: any, b: any) => {
           return new Date(b.payment_date).getTime() - new Date(a.payment_date).getTime()
         })
+        this.dataSource = new MatTableDataSource(this.storedData)
+      }, (error) => {
+        console.log(error)
+      })
+    } else if (this.billUuid) {
+      this.billService.getPaymentsByBill(this.billUuid, 'bill_uuid').subscribe((data) => {
+        this.storedData = data.data
+        this.totalAmount = data.totalAmount
+        // this.sortedData = data;
         this.dataSource = new MatTableDataSource(this.storedData)
       }, (error) => {
         console.log(error)
@@ -199,6 +199,10 @@ export class PaymentComponent implements OnInit {
         })
       }
     })
+  }
+
+  viewCustomerBill(customer_uuid) {
+    this.router.navigate([`/bill/${customer_uuid}`, { page: 'payment'}])
   }
 
   // sortData(sort: Sort) {

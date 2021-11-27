@@ -60,7 +60,7 @@ export class CommonService {
   }
 
   archiveData(uuid: string, entity: string, data: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${entity}/${uuid}`, data)
+    return this.http.patch(`${this.apiUrl}/${entity}/${uuid}`, data)
   }
 }
 

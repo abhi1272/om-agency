@@ -101,7 +101,7 @@ export class DashboardComponent implements OnInit {
 
   public getCustomerData() {
     this.commonService.getEntityData('customer').subscribe((data) => {
-      this.customerData = data
+      this.customerData = data.data
     }, (error) => {
       console.log(error)
     })

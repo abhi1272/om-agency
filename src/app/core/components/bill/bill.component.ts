@@ -215,4 +215,8 @@ checkboxLabel(row?: any): string {
       }
     })
   }
+
+  viewCustomerPayment(customer_uuid) {
+    this.router.navigate([`/payment/${customer_uuid}`, { page: 'customer'}])
+  }
 }
