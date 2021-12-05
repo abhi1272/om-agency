@@ -1,16 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import * as Chartist from 'chartist';
-import { ChartType, ChartEvent } from 'ng-chartist';
-
-declare var require: any;
-const data = require('./data.json');
-
+import { Component, Input, OnInit } from '@angular/core'
+import * as Chartist from 'chartist'
+import { ChartType, ChartEvent } from 'ng-chartist'
+import * as moment from 'moment'
 export interface Chart {
-  type: ChartType;
-  data: Chartist.IChartistData;
-  options?: any;
-  responsiveOptions?: any;
-  events?: ChartEvent;
+  type: ChartType
+  data: Chartist.IChartistData
+  options?: any
+  responsiveOptions?: any
+  events?: ChartEvent
 }
 
 @Component({
@@ -19,43 +16,66 @@ export interface Chart {
   styleUrls: ['./sales-overview-grap.component.css']
 })
 export class SalesOverviewGrapComponent implements OnInit {
+  multi: any[]
+  view: any[] = [1200, 400]
 
-  barChart1: Chart = {
-    type: 'Bar',
-    data: data['Bar'],
-    options: {
-      seriesBarDistance: 15,
-      high: 12,
+  @Input() dailyData: any
+  modifiedDailyData
 
-      axisX: {
-        showGrid: false,
-        offset: 20
-      },
-      axisY: {
-        showGrid: true,
-        offset: 40
-      },
-      height: 360
-    },
+  // options
+  showXAxis = true
+  showYAxis = true
+  gradient = true
+  showLegend = true
+  showXAxisLabel = true
+  xAxisLabel = 'Date'
+  showYAxisLabel = true
+  yAxisLabel = 'Amount'
+  legendTitle = 'Years'
 
-    responsiveOptions: [
-      [
-        'screen and (min-width: 640px)',
-        {
-          axisX: {
-            labelInterpolationFnc: function (value: number, index: number): string {
-              return index % 1 === 0 ? `${value}` : '';
-            }
-          }
-        }
-      ]
-    ]
-  };
+  colorScheme = {
+    domain: ['#26c6da', '#1e88e5', '#AAAAAA']
+  }
 
+  constructor() {
+  }
 
-  constructor() { }
+ onSelect(data): void {
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)))
+  }
+
+  // onActivate(data): void {
+  //   console.log('Activate', JSON.parse(JSON.stringify(data)))
+  // }
+
+  // onDeactivate(data): void {
+  //   console.log('Deactivate', JSON.parse(JSON.stringify(data)))
+  // }
+
 
   ngOnInit(): void {
+    const modifiedData = []
+    this.dailyData.map((item) => {
+      if (item.payment_date !== 'Total') {
+        const obj = {
+          'name': moment(item.payment_date).format('DD-MM-YYYY'),
+          'series': [
+            {
+              'name': 'Bill',
+              'value': item.totalBillAmount
+            },
+            {
+              'name': 'Payment',
+              'value': item.totalPaymentAmount
+            }
+          ]
+        }
+        modifiedData.push(obj)
+      }
+    })
+    console.log(modifiedData)
+    this.modifiedDailyData = modifiedData
+    Object.assign(this, {modifiedData} )
   }
 
 }

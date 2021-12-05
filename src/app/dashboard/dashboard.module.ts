@@ -7,7 +7,6 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutes } from './dashboard.routing';
 import { ChartistModule } from 'ng-chartist';
 import { SalesOverviewGrapComponent } from './dashboard-components/sales-overview-grap/sales-overview-grap.component';
-import { VisiterGraphComponent } from './dashboard-components/visiter-graph/visiter-graph.component';
 import { StickerComponent } from './dashboard-components/sticker/sticker.component';
 import { ContactsComponent } from './dashboard-components/contacts/contacts.component';
 import { ActivityComponent } from './dashboard-components/activity/activity.component';
@@ -15,6 +14,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker'
 import {SearchPipe} from '../core/shared/search.pipe'
 import { AngularMaterialModule } from 'app/shared/angular-material.module';
+import { AreaOverviewGraphComponent } from './dashboard-components/area-overview-graph/area-overview-graph.component';
 
 @NgModule({
   imports: [
@@ -31,8 +31,8 @@ import { AngularMaterialModule } from 'app/shared/angular-material.module';
     BsDatepickerConfig
   ],
   declarations: [DashboardComponent, SearchPipe,
-     SalesOverviewGrapComponent, VisiterGraphComponent,
-     StickerComponent, ContactsComponent, ActivityComponent
+     SalesOverviewGrapComponent,
+     StickerComponent, ContactsComponent, ActivityComponent, AreaOverviewGraphComponent
     ]
 })
 export class DashboardModule { }

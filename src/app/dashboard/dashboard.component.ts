@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnChanges, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { CommonService } from 'app/core/services/common.service'
 import * as moment from 'moment'
@@ -9,7 +9,7 @@ import {DashboardService} from './services/dashboard.service'
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnChanges {
 
   dataSource = []
   todayData: any
@@ -84,6 +84,10 @@ export class DashboardComponent implements OnInit {
       this.todayData = data.data[0]
     })
   }
+
+  ngOnChanges() {
+     console.log(this.dataSource)
+    }
 
   public getMonthlyData(event?: any, type?: any) {
     const filter = event ? event.value : null

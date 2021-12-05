@@ -1,0 +1,27 @@
+<mat-card>
+    <mat-card-content>
+        <div class="d-flex flex-wrap">
+            <div>
+                <mat-card-title>Area Overview</mat-card-title>
+                 <!-- <mat-card-subtitle>Ample Admin Vs Material Admin</mat-card-subtitle>  -->
+             </div>
+            <div class="ml-auto">
+                <ul class="list-inline">
+                    <li>
+                        <button [ngClass]="{'blue':currentData === 'bill'}" mat-raised-button (click)="showBills()">Bill</button>
+                    <li>
+                        <button [ngClass]="{'blue':currentData === 'payment'}" mat-raised-button (click)="showPayment()">Payment</button>
+                </ul>
+            </div>
+        </div>
+        <div style="height:250px;" *ngIf="single && single.length">
+            <ngx-charts-pie-grid
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="single"
+            (select)="onSelect($event)">
+          </ngx-charts-pie-grid>
+        </div>
+    </mat-card-content>
+</mat-card>
+

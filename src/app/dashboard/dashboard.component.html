@@ -137,21 +137,13 @@
 </div>
 </div>
 
-<div fxLayout="row">
-  <!-- column -->
-  <div fxFlex.gt-lg="66" fxFlex.gt-md="66" fxFlex.gt-xs="100" fxFlex="100">
-
-    <app-sales-overview-grap></app-sales-overview-grap>
-
+<div class="row">
+  <div *ngIf="dataSource && dataSource.length" class="col-12" >
+    <app-sales-overview-grap [dailyData]="dataSource"></app-sales-overview-grap>
   </div>
-  <!-- column -->
-  <!-- column -->
-  <div fxFlex.gt-lg="33" fxFlex.gt-md="33" fxFlex.gt-xs="100" fxFlex="100">
-
-    <app-visiter-graph></app-visiter-graph>
-
-  </div>
-  <!-- column -->
+</div>
+<div class="row">
+  <app-area-overview-graph class="col-12"></app-area-overview-graph>
 </div>
 
 </div>

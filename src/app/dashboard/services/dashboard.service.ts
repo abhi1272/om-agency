@@ -21,6 +21,10 @@ export class DashboardService {
     return this.http.get(`${this.apiUrl}/dashboard/total`)
   }
 
+  getDataByArea(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/dashboard/area/data`)
+  }
+
   getMonthlyData(filter: Array<string>, type: string): Observable<any> {
     if (filter) {
       return this.http.get(`${this.apiUrl}/dashboard/monthly?${type}=${JSON.stringify(filter)}`)

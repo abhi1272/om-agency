@@ -3,21 +3,34 @@
         <div class="d-flex flex-wrap">
             <div>
                 <mat-card-title>Sales Overview</mat-card-title>
-                 <mat-card-subtitle>Ample Admin Vs Material Admin</mat-card-subtitle> 
+                 <!-- <mat-card-subtitle>Ample Admin Vs Material Admin</mat-card-subtitle>  -->
              </div>
             <div class="ml-auto">
                 <ul class="list-inline">
                     <li>
-                        <h6 class="text-success m-0"><i class="mdi mdi-checkbox-blank-circle font-10 m-r-10 "></i>Ample</h6> </li>
+                        <h6 style="color: #26c6da;" class="m-0"><i class="mdi mdi-checkbox-blank-circle font-10 m-r-10 "></i>Bill</h6> </li>
                     <li>
-                        <h6 class=" text-info m-0"><i class="mdi mdi-checkbox-blank-circle font-10 m-r-10"></i>Pixel</h6> </li>
+                        <h6 style="color: #1e88e5;" class="m-0"><i class="mdi mdi-checkbox-blank-circle font-10 m-r-10"></i>Payment</h6> </li>
                 </ul>
             </div>
         </div>
 
-        <div class="barchrt" style="height:360px;">
-            <x-chartist class="" [data]="barChart1.data" [type]="barChart1.type" [options]="barChart1.options" [responsiveOptions]="barChart1.responsiveOptions"
-                [events]="barChart1.events"> </x-chartist>
+        <div class="barchrt" style="height:380px;">
+            <ngx-charts-bar-vertical-2d
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="modifiedDailyData"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [legendTitle]="legendTitle"
+            (select)="onSelect($event)"
+            >
+          </ngx-charts-bar-vertical-2d>
         </div>
     </mat-card-content>
 </mat-card>
+
