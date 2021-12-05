@@ -14,9 +14,9 @@ export class CommonService {
   dateFormat = 'dd-MM-yyy'
   constructor(public dialog: MatDialog, public http: HttpClient) { }
 
-  openDialog(componentName: any, data: object): Observable<any> {
+  openDialog(componentName: any, data: object, width = '550px'): Observable<any> {
     const dialogRef = this.dialog.open(componentName, {
-      width: '550px',
+      width: width,
       data,
       disableClose: true
     })

@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections'
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { MatTableDataSource } from '@angular/material/table'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -19,7 +19,7 @@ import { CreateComponent } from 'app/core/shared/modals/create/create.component'
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'id', 'name', 'customer_area', 'paid_amount', 'date', 'notes', 'edit', 'delete']
+  displayedColumns: string[] = [ 'id', 'name', 'customer_area', 'paid_amount', 'date', 'notes', 'edit', 'delete']
   dataSource: any
   storedData: any
   customerUuid: any
@@ -31,6 +31,8 @@ export class PaymentComponent implements OnInit {
   minDate: any
   maxDate: any
 
+  @Input() customerData: any
+  @Input() setDisplayedColumns: any
   // @ViewChild(MatSort) sort: MatSort;
 
   constructor(public dialog: MatDialog, public toast: ToastrService, public billService: BillService,
@@ -42,20 +44,29 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit(): void {
     const yesterDay = moment().subtract(1, 'days').format('YYYY-MM-DD')
-    this.route.params.subscribe((data) => {
-      if (data.page === 'bill') {
-        this.billUuid = data.id
-      } else if (data.id) {
-        this.customerUuid = data.id
-      } else {
-        this.selectedDate = yesterDay
-      }
-    })
-    this.route.queryParams.subscribe((data) => {
-      if (data.date) {
-        this.selectedDate = data.date
-      }
-    })
+
+    if (this.setDisplayedColumns) {
+      this.displayedColumns = this.setDisplayedColumns
+    }
+
+    if (this.customerData) {
+      this.customerUuid = this.customerData.uuid
+    } else {
+      this.route.params.subscribe((data) => {
+        if (data.page === 'bill') {
+          this.billUuid = data.id
+        } else if (data.id) {
+          this.customerUuid = data.id
+        } else {
+          this.selectedDate = yesterDay
+        }
+      })
+      this.route.queryParams.subscribe((data) => {
+        if (data.date) {
+          this.selectedDate = data.date
+        }
+      })
+    }
     this.getPaymentData(this.selectedDate)
   }
 
@@ -123,7 +134,6 @@ export class PaymentComponent implements OnInit {
     } else if (this.customerUuid) {
       this.billService.getPaymentsByBill(this.customerUuid, 'customer_uuid').subscribe((data) => {
         this.storedData = data.data
-        // this.sortedData = data;
         this.totalAmount = data.totalAmount
         this.storedData = this.storedData.sort((a: any, b: any) => {
           return new Date(b.payment_date).getTime() - new Date(a.payment_date).getTime()

@@ -29,6 +29,7 @@ import { LoaderInterceptor } from './interceptor/loader-interceptor'
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { environment } from '../environments/environment'
 import { AngularMaterialModule } from './shared/angular-material.module';
+import { LoaderService } from './core/services/loader.service'
 
 @NgModule({
   declarations: [
@@ -59,6 +60,8 @@ import { AngularMaterialModule } from './shared/angular-material.module';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
     // { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

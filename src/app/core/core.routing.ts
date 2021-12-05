@@ -7,11 +7,16 @@ import { ExpenseComponent } from './components/expense/expense.component'
 import { CompanyComponent } from './components/company/company.component'
 import { CompanyPaymentComponent } from './components/company-payment/company-payment.component'
 import { CreateTableComponent } from './components/create-table/create-table.component'
+import { ViewSummaryComponent } from './components/view-summary/view-summary.component'
 
 export const CoreRoutes: Routes = [
   {
     path: 'customer',
     component: CustomerComponent
+  },
+  {
+    path: 'summary',
+    component: ViewSummaryComponent
   },
   {
     path: 'company',

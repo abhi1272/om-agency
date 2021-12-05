@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections'
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatSort } from '@angular/material/sort'
 import { MatTableDataSource } from '@angular/material/table'
@@ -33,6 +33,9 @@ export class BillComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | any
   @ViewChild(MatSort) sort: MatSort | any
 
+  @Input() customerData: any
+  @Input() setDisplayedColumns: any
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -45,24 +48,34 @@ export class BillComponent implements OnInit {
 
   ngOnInit() {
     const yesterDay = moment().subtract(1, 'days').format('YYYY-MM-DD')
-    this.activatedRoute.queryParams.subscribe((data) => {
-      if (data.date) {
-        this.selectedDate = data.date
-      }
-    })
-    this.activatedRoute.params.subscribe((data) => {
-      if (data.id) {
-        this.customerUuid = data.id
-      } else {
-        this.selectedDate = yesterDay
-      }
-      if (data.name) {
-        this.customerName = data.name
-      }
-      if (data.place) {
-        this.placeName = data.place
-      }
-    })
+
+    if (this.setDisplayedColumns) {
+      this.displayedColumns = this.setDisplayedColumns
+    }
+
+    if (this.customerData) {
+      this.customerUuid = this.customerData.uuid
+    } else {
+      this.activatedRoute.params.subscribe((data) => {
+        if (data.id) {
+          this.customerUuid = data.id
+        } else {
+          this.selectedDate = yesterDay
+        }
+        if (data.name) {
+          this.customerName = data.name
+        }
+        if (data.place) {
+          this.placeName = data.place
+        }
+      })
+      this.activatedRoute.queryParams.subscribe((data) => {
+        if (data.date) {
+          this.selectedDate = data.date
+        }
+      })
+    }
+
     // this.customerUuid = this.activatedRoute.snapshot.paramMap.get('id')
     this.getBillData(this.selectedDate)
   }

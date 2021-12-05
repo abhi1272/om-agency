@@ -2,6 +2,15 @@ table {
   width: 100%;
 }
 
+.name-hover{
+  cursor: pointer;
+}
+
+.name-hover:hover{
+  color: #1e88e5;
+}
+
+
 .mat-card-avatar{
   width: 0px;
 }

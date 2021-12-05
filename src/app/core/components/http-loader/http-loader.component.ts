@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { LoaderService } from '../../services/loader.service';
+import { Component, OnInit } from '@angular/core'
+import { LoaderService } from '../../services/loader.service'
 
 @Component({
   selector: 'app-http-loader',
@@ -14,14 +14,14 @@ import { LoaderService } from '../../services/loader.service';
 })
 export class HttpLoaderComponent implements OnInit {
 
-  loading: boolean = false;
+  loading = false
 
   constructor(
     private loaderService: LoaderService
   ) {
     this.loaderService.isHttpLoading.subscribe(data => {
-      this.loading = data;
-    });
+      this.loading = data
+    })
   }
 
   ngOnInit(): void {

@@ -7,6 +7,7 @@ import { Router } from '@angular/router'
 import { CommonService } from '../../services/common.service'
 import { CreateComponent } from 'app/core/shared/modals/create/create.component'
 import { ToastrService } from 'ngx-toastr'
+import { ViewSummaryComponent } from 'app/core/components/view-summary/view-summary.component'
 // import jsPDF from 'jspdf'
 // import jsPDF = require('jspdf') // // typescript without esModuleInterop flag
 // import jsPDF from 'yworks-pdf' // using yworks fork
@@ -111,6 +112,12 @@ export class CustomerComponent implements OnInit {
 
   showBillList(uuid: string): void {
     this.router.navigate([`/customer/${uuid}`])
+  }
+
+  showSummary(row): void {
+    this.commonService.openDialog(ViewSummaryComponent, row, '850px').subscribe((data) => {
+      this.getCustomerData()
+    })
   }
 
   viewPaymentClickHandler(row: any): void {

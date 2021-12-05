@@ -22,13 +22,13 @@ import { CreateComponent } from './shared/modals/create/create.component'
 import { AngularMaterialModule } from 'app/shared/angular-material.module';
 import { ReportComponent } from './components/report/report.component';
 import { CreateTableComponent } from './components/create-table/create-table.component'
-import { SharedModule } from 'app/shared/shared.module'
+import { SharedModule } from 'app/shared/shared.module';
+import { ViewSummaryComponent } from './components/view-summary/view-summary.component'
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(CoreRoutes),
-    // DemoMaterialModule,
     AngularMaterialModule,
     HttpClientModule,
     FormsModule,
@@ -49,6 +49,7 @@ import { SharedModule } from 'app/shared/shared.module'
     CompanyPaymentComponent,
     ReportComponent,
     CreateTableComponent,
+    ViewSummaryComponent,
   ]
 })
 export class CoreModule {}

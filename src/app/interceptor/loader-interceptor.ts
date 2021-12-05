@@ -1,11 +1,17 @@
+// loader-interceptor.service.ts
 import { Injectable } from '@angular/core'
-import { HttpResponse, HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http'
+import {
+  HttpResponse,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor
+} from '@angular/common/http'
 import { Observable } from 'rxjs'
-import { LoaderService } from '../core/services/loader.service'
+import { LoaderService } from 'app/core/services/loader.service'
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
-
   private requests: HttpRequest<any>[] = []
 
   constructor(private loaderService: LoaderService) { }
@@ -22,8 +28,10 @@ export class LoaderInterceptor implements HttpInterceptor {
 
     this.requests.push(req)
 
+    console.log('No of requests--->' + this.requests.length)
+
     this.loaderService.isHttpLoading.next(true)
-    return Observable.create((observer: any) => {
+    return Observable.create(observer => {
       const subscription = next.handle(req)
         .subscribe(
           event => {
@@ -33,7 +41,7 @@ export class LoaderInterceptor implements HttpInterceptor {
             }
           },
           err => {
-            // alert('error' + err);
+            alert('error' + err)
             this.removeRequest(req)
             observer.error(err)
           },

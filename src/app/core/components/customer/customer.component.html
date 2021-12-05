@@ -55,7 +55,8 @@
       <!-- Name Column -->
       <ng-container matColumnDef="name" id="my-content">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME </th>
-        <td mat-cell *matCellDef="let row" (click)="showBillList(row.uuid)"> {{row.name}} </td>
+        <td class="name-hover" matTooltip="Check bill/payment" mat-cell *matCellDef="let row" (click)="showSummary(row)"> 
+          {{row.name}} </td>
       </ng-container>
 
       <!-- Area Column -->

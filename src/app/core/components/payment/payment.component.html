@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="!customerData">
   <mat-form-field class="col-sm-4" appearance="outline">
     <mat-label>Search Customer</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Google" #input>
@@ -12,18 +12,18 @@
   <div class="layout-main-content-inner">
     <div class="container-fluid">
       <div class="row d-flex justify-content-between mb-2 mt-2 ml-1">
-        <div class="col-3">
+        <div class="col-4">
           <h2 class="text-muted txtlight">Payments</h2>
         </div>
         <h2 class="col-5">
           Total: {{totalAmount | currency: 'INR'}}
         </h2>
-        <div class="col-sm-2" *ngIf="customerUuid">
+        <!-- <div class="col-sm-2" *ngIf="customerUuid">
           <button type="button" (click)="viewCustomerBill(customerUuid)" class="btn btn-primary">
             View Bill
           </button>
-        </div>
-        <div class="col-sm-2" *ngIf="customerUuid">
+        </div> -->
+        <div class="col-sm-3" *ngIf="customerUuid">
           <button type="button" (click)="openUserDialog()" class="btn btn-primary">
             + PAYMENT
           </button>

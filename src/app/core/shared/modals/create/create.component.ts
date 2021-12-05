@@ -95,9 +95,9 @@ export class CreateComponent implements OnInit {
 
   createData(): void {
     this.loading = true
-    if (this.data.pages === 'customer') {
+    // if (this.data.pages === 'customer') {
       this.createForm.value.customer_uuid = this.data.data.uuid
-    }
+    // }
     if (this.data.data && this.data.data.customer_uuid) {
       this.createForm.value.customer_uuid = this.data.data.customer_uuid
     }

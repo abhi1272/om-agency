@@ -1,0 +1,14 @@
+<div mat-dialog-title>
+    <div class="row">
+        <h5 class="col-9">{{data.name}} - {{data.area}}</h5>
+        <button mat-raised-button class="col-3" type="button" (click)="switchPage()">Switch To - {{page === 'payment' ? 'Bill' : 'Payment'}}</button>
+    </div>
+</div>
+<div mat-dialog-content>
+    <app-payment *ngIf="page === 'payment'" [customerData]="data" [setDisplayedColumns]="setDisplayedColumns"></app-payment>
+    <app-bill *ngIf="page === 'bill'" [customerData]="data" [setDisplayedColumns]="setDisplayedColumns"></app-bill>
+</div>
+<div mat-dialog-actions class="float-right mb-1">
+    <button type="button" mat-button (click)="close()" class="btn btn-light mr-4" data-dismiss="modal">Close</button>
+    <!-- <button mat-button type="button" class="btn btn-primary">Save</button> -->
+</div>
