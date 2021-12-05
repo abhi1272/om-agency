@@ -23,6 +23,10 @@ export const CoreRoutes: Routes = [
     component: CompanyComponent
   },
   {
+    path: 'company-bill',
+    component: BillComponent
+  },
+  {
     path: 'bill',
     component: BillComponent
   },

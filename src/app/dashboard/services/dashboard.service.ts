@@ -10,24 +10,28 @@ export class DashboardService {
   apiUrl = environment.url
   constructor(public http: HttpClient) { }
 
-  getDayWiseData(dateObj: any, filter: any, type: string): Observable<any> {
+  getDayWiseData(dateObj: any, filter: any, type: string, transaction_type: string): Observable<any> {
     if (filter) {
-      return this.http.get(`${this.apiUrl}/dashboard/daily?start_date=${dateObj.start_date}&&end_date=${dateObj.end_date}&${type}=${JSON.stringify(filter)}`)
+      return this.http.get(`${this.apiUrl}/dashboard/daily?start_date=${dateObj.start_date}&&end_date=${dateObj.end_date}&${type}=${JSON.stringify(filter)}&transaction_type=${transaction_type}`)
     }
-    return this.http.get(`${this.apiUrl}/dashboard/daily?start_date=${dateObj.start_date}&&end_date=${dateObj.end_date}`)
+    return this.http.get(`${this.apiUrl}/dashboard/daily?start_date=${dateObj.start_date}&&end_date=${dateObj.end_date}&&transaction_type=${transaction_type}`)
   }
 
-  getTotalData(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/dashboard/total`)
+  getTotalData(transaction_type?): Observable<any> {
+    return this.http.get(`${this.apiUrl}/dashboard/total?transaction_type=${transaction_type}`)
   }
 
   getDataByArea(): Observable<any> {
     return this.http.get(`${this.apiUrl}/dashboard/area/data`)
   }
 
-  getMonthlyData(filter: Array<string>, type: string): Observable<any> {
+  getMonthlyData(filter: Array<string>, type: string, transaction_type: string): Observable<any> {
     if (filter) {
       return this.http.get(`${this.apiUrl}/dashboard/monthly?${type}=${JSON.stringify(filter)}`)
+    } else if (transaction_type) {
+      return this.http.get(`${this.apiUrl}/dashboard/monthly?transaction_type=${transaction_type}`)
+    } else if (filter && transaction_type) {
+      return this.http.get(`${this.apiUrl}/dashboard/monthly?${type}=${JSON.stringify(filter)}&transaction_type=${transaction_type}`)
     }
     return this.http.get(`${this.apiUrl}/dashboard/monthly`)
   }

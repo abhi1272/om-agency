@@ -29,6 +29,7 @@ export class BillComponent implements OnInit {
   minDate: any
   maxDate: any
   picker: any
+  type
   selection = new SelectionModel<any>(true, [])
   @ViewChild(MatPaginator) paginator: MatPaginator | any
   @ViewChild(MatSort) sort: MatSort | any
@@ -47,6 +48,12 @@ export class BillComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.router.url.includes('company-bill')) {
+      this.type = 'Purchase'
+    } else {
+      this.type = 'Sale'
+    }
+
     const yesterDay = moment().subtract(1, 'days').format('YYYY-MM-DD')
 
     if (this.setDisplayedColumns) {
@@ -107,7 +114,7 @@ checkboxLabel(row?: any): string {
 }
 
   getBillData(filter?: any) {
-    console.log('filter', filter)
+    console.log('filter', this.router.url)
     if (filter !== undefined) {
       this.router.navigate(
         [],
@@ -119,7 +126,7 @@ checkboxLabel(row?: any): string {
         this.selectedDate = filter
     }
     if (this.selectedDate) {
-      this.billService.getBillsByDate(this.selectedDate).subscribe((data) => {
+      this.billService.getBillsByDate(this.selectedDate, this.type).subscribe((data) => {
         this.storeData = data.data
         this.storeData = this.storeData.filter((bill: { customer: { type: string } }) => bill.customer.type !== 'company')
         this.totalBillAmount = data.totalAmount
@@ -131,7 +138,7 @@ checkboxLabel(row?: any): string {
         console.log(error)
       })
     } else if (!this.customerUuid) {
-      this.commonService.getEntityData('bill').subscribe((data) => {
+      this.commonService.getEntityData('bill', this.type).subscribe((data) => {
         this.storeData = data.data
         this.totalBillAmount = data.totalAmount
         this.dataSource = new MatTableDataSource(this.storeData)

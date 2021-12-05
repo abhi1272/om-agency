@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit, OnChanges {
   preDefinedDateObj: any
   selectedCustomerData: any
   currentSelectType: any
+  transaction_type = 'Sale'
   ranges: any = [
     {
       value: [new Date(), new Date()],
@@ -78,7 +79,8 @@ export class DashboardComponent implements OnInit, OnChanges {
   }
 
   public getDayWiseData() {
-    this.dashboardService.getDayWiseData(this.preDefinedDateObj, this.selectedCustomerData, this.currentSelectType).subscribe((data) => {
+    this.dashboardService.getDayWiseData(this.preDefinedDateObj, this.selectedCustomerData, this.currentSelectType, this.transaction_type
+      ).subscribe((data) => {
       this.dateType = 'daily'
       this.dataSource = data.data
       this.todayData = data.data[0]
@@ -91,14 +93,14 @@ export class DashboardComponent implements OnInit, OnChanges {
 
   public getMonthlyData(event?: any, type?: any) {
     const filter = event ? event.value : null
-    this.dashboardService.getMonthlyData(filter, type).subscribe((data) => {
+    this.dashboardService.getMonthlyData(filter, type, this.transaction_type).subscribe((data) => {
       this.monthlyData = data.data
       this.dateType = 'monthly'
     })
   }
 
   public getDayTotalData() {
-    this.dashboardService.getTotalData().subscribe((data) => {
+    this.dashboardService.getTotalData(this.transaction_type).subscribe((data) => {
       this.totalData = data
     })
   }
@@ -141,6 +143,15 @@ export class DashboardComponent implements OnInit, OnChanges {
           queryParams: { date: moment(row.payment_date).format('YYYY-MM-DD') },
           queryParamsHandling: 'merge'
         })
+    }
+  }
+
+  public getTransactionData(type) {
+    this.transaction_type = type
+    if (this.dateType === 'daily') {
+      this.getDayWiseData()
+    } else {
+      this.getMonthlyData()
     }
   }
 

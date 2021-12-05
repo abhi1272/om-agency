@@ -30,8 +30,11 @@ export class CommonService {
 
   // CRUD
 
-  getEntityData(entityName: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${entityName}`)
+  getEntityData(entityName: string, transaction_type?): Observable<any> {
+    if (transaction_type) {
+      return this.http.get(`${this.apiUrl}/${entityName}?type=${transaction_type}`)
+    }
+    return this.http.get(`${this.apiUrl}/${entityName} `)
   }
 
   addEntityData(entityName: string, data: any): Observable<any> {

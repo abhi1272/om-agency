@@ -17,8 +17,8 @@ const MENUITEMS = [
   ] },
   { state: 'purchase', name: 'Purchase', type: 'link', icon: 'shopping_basket', subMenu: [
     { state: 'company', name: 'Company', type: 'link', icon: 'store' },
-    { state: 'bill', name: 'Bill', type: 'link', icon: 'receipt' },
-    { state: 'payment', name: 'Payment', type: 'link', icon: 'payment' },
+    { state: 'company-bill', name: 'Bill', type: 'link', icon: 'receipt' },
+    { state: 'company-payment', name: 'Payment', type: 'link', icon: 'payment' },
   ] },
   { state: 'entity/expense', name: 'Expense', type: 'link', icon: 'money' },
   { state: 'table', name: 'Table', type: 'link', icon: 'store' }

@@ -19,15 +19,25 @@ export class BillService {
     return this.http.get(`${this.apiUrl}/payment?${uuidType}=${uuid}`)
   }
 
-  getPaymentsByDate(date: any): Observable<any> {
+  getPaymentsByDate(date: any, type?: string): Observable<any> {
+    if (type) {
+      return this.http.get(`${this.apiUrl}/payment?payment_date=${date}&&type=${type}`)
+    }
     return this.http.get(`${this.apiUrl}/payment?payment_date=${date}`)
+
   }
 
-  getBillsByDate(date: any): Observable<any> {
-    return this.http.get(`${this.apiUrl}/bill/?bill_date=${date}`)
+  getBillsByDate(date: any, type?): Observable<any> {
+    if (type) {
+      return this.http.get(`${this.apiUrl}/bill?bill_date=${date}&&type=${type}`)
+    }
+    return this.http.get(`${this.apiUrl}/bill?bill_date=${date}`)
   }
 
-  getPaymentALl(): Observable<any> {
+  getPaymentALl(type?): Observable<any> {
+    if (type) {
+      return this.http.get(`${this.apiUrl}/payment?type=${type}`)
+    }
     return this.http.get(`${this.apiUrl}/payment`)
   }
 

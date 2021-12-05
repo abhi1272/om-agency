@@ -108,7 +108,9 @@ export class CreateComponent implements OnInit {
 
 
     if (this.data.page === 'company') {
-      this.createForm.value.type = 'company'
+      this.createForm.value.type = 'Purchase'
+    } else {
+      this.createForm.value.type = 'Sale'
     }
 
     if (this.data.page === 'payment') {

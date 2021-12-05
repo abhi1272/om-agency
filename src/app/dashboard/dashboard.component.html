@@ -50,6 +50,13 @@
   <div class="col-sm-1">
     <button mat-raised-button [ngClass]="{'btn-primary': dateType === 'monthly'}" (click)="getMonthlyData()">Monthly</button>
   </div>
+  <div class="col-sm-1"></div>
+  <div class="col-sm-1">
+    <button mat-raised-button [ngClass]="{'btn-primary': transaction_type === 'Sale'}" (click)="getTransactionData('Sale')">Sale</button>
+  </div>
+  <div class="col-sm-1">
+    <button mat-raised-button [ngClass]="{'btn-primary': transaction_type === 'Purchase'}" (click)="getTransactionData('Purchase')">Purchase</button>
+  </div>
 </div>
 
 <div class="row ml-1 mb-2">

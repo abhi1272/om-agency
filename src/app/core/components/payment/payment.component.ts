@@ -111,7 +111,7 @@ export class PaymentComponent implements OnInit {
       this.selectedDate = filter
     }
     if (this.selectedDate) {
-      this.billService.getPaymentsByDate(this.selectedDate).subscribe((data) => {
+      this.billService.getPaymentsByDate(this.selectedDate, 'Sale').subscribe((data) => {
         this.storedData = data.data
         this.storedData = this.storedData.filter((pay: { customer: { type: string } }) => pay.customer.type !== 'company')
         this.totalAmount = data.totalAmount
@@ -143,7 +143,7 @@ export class PaymentComponent implements OnInit {
         console.log(error)
       })
     } else {
-      this.billService.getPaymentALl().subscribe((data) => {
+      this.billService.getPaymentALl('Sale').subscribe((data) => {
         this.storedData = data.data
         this.totalAmount = data.totalAmount
         // this.sortedData = data;

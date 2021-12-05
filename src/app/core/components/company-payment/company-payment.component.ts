@@ -92,7 +92,7 @@ export class CompanyPaymentComponent implements OnInit {
   // Get Project related functions
 
   public getPaymentData(filter?: any): void {
-    if (filter) {
+    if (filter !== undefined) {
       this.router.navigate(
         [],
         {
@@ -124,7 +124,7 @@ export class CompanyPaymentComponent implements OnInit {
         console.log(error)
       })
     } else if (this.selectedDate) {
-      this.billService.getPaymentsByDate(this.selectedDate).subscribe((data) => {
+      this.billService.getPaymentsByDate(this.selectedDate, 'Purchase').subscribe((data) => {
         this.storedData = data.data
         this.totalAmount = data.totalAmount
         this.storedData = this.storedData.sort((a: any, b: any) => {
@@ -135,7 +135,7 @@ export class CompanyPaymentComponent implements OnInit {
         console.log(error)
       })
     } else {
-      this.billService.getPaymentALl().subscribe((data) => {
+      this.billService.getPaymentALl('Purchase').subscribe((data) => {
         this.storedData = data.data
         this.totalAmount = data.totalAmount
         // this.sortedData = data;

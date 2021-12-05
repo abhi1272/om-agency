@@ -57,16 +57,16 @@ export class CompanyComponent implements OnInit {
 
     }
 
-  getCustomerData(filter?: any) {    
+  getCustomerData(filter?: any) {
     this.loading = true
     this.commonService.getEntityData('company').subscribe((data) => {
-      this.storeData = data
+      this.storeData = data.data
       this.loading = false
       this.storeData.map((item: any) => {
-        item.totalBillAmountLeft = item.totalBillAmount - item.totalPaidAmount
+        item.totalBillAmountLeft = item.totalBillAmount - item.totalPaymentAmount || 0
       })
       this.filterByPlace([])
-      this.dataSource = new MatTableDataSource(data)
+      this.dataSource = new MatTableDataSource(this.storeData)
       this.dataSource.paginator = this.paginator
       this.sortedData = this.storeData.slice()
       this.printData = this.storeData.slice()
@@ -122,7 +122,7 @@ export class CompanyComponent implements OnInit {
     const value = this.commonService.openDialog(CreateComponent, createModalObj, )
     value.subscribe((data) => {
       if (data) {
-        // this.getCustomerData();
+        this.getCustomerData()
       }
     })
   }
@@ -138,7 +138,7 @@ export class CompanyComponent implements OnInit {
     const value = this.commonService.openDialog(CreateComponent, createModalObj)
     value.subscribe((data) => {
       if (data) {
-        // this.getCustomerData();
+        this.getCustomerData()
       }
     })
   }
