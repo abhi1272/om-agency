@@ -1,17 +1,17 @@
 table {
-    width: 100%;
-  }
-  
-  .mat-card-avatar{
-    width: 0px;
-  }
-  
-  @media screen and (min-width: 0px) and (max-width: 800px) {
-    .show-card { display: block; } 
-    .hide-table { display: none;} /* show it on small screens */
-  }
-  
-  @media screen and (min-width: 800px) {
-    .show-card { display: none; } 
-    .hide-table { display: block;}    /* hide it elsewhere */
-  }
+  width: 100%;
+}
+
+.mat-card-avatar{
+  width: 0px;
+}
+
+@media screen and (min-width: 0px) and (max-width: 800px) {
+  .show-card { display: block; } 
+  .hide-table { display: none;} /* show it on small screens */
+}
+
+@media screen and (min-width: 800px) {
+  .show-card { display: none; } 
+  .hide-table { display: block;}    /* hide it elsewhere */
+}

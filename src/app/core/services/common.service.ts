@@ -30,31 +30,19 @@ export class CommonService {
 
   // CRUD
 
-  getEntityData(entityName: string, transaction_type?): Observable<any> {
-    if (transaction_type) {
-      return this.http.get(`${this.apiUrl}/${entityName}?type=${transaction_type}`)
-    }
+  getEntityData(entityName: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/${entityName} `)
   }
 
   addEntityData(entityName: string, data: any): Observable<any> {
-    if (entityName === 'company-payment') {
-      entityName = 'payment'
-    }
     return this.http.post(`${this.apiUrl}/${entityName}/add`, data)
   }
 
   editData(entityName: string, uuid: string, data: any): Observable<any> {
-    if (entityName === 'company-payment') {
-      entityName = 'payment'
-    }
     return this.http.patch(`${this.apiUrl}/${entityName}/${uuid}`, data)
   }
 
   deleteData(entityName: string, uuid: string): Observable<any> {
-    if (entityName === 'company-payment') {
-      entityName = 'payment'
-    }
     return this.http.delete(`${this.apiUrl}/${entityName}/${uuid}`, {})
   }
 

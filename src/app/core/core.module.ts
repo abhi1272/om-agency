@@ -23,7 +23,9 @@ import { AngularMaterialModule } from 'app/shared/angular-material.module';
 import { ReportComponent } from './components/report/report.component';
 import { CreateTableComponent } from './components/create-table/create-table.component'
 import { SharedModule } from 'app/shared/shared.module';
-import { ViewSummaryComponent } from './components/view-summary/view-summary.component'
+import { ViewSummaryComponent } from './components/view-summary/view-summary.component';
+import { CompanyBillComponent } from './components/company-bill/company-bill.component';
+import { CompanyCreateComponent } from './shared/modals/company-create/company-create.component'
 
 @NgModule({
   imports: [
@@ -50,6 +52,8 @@ import { ViewSummaryComponent } from './components/view-summary/view-summary.com
     ReportComponent,
     CreateTableComponent,
     ViewSummaryComponent,
+    CompanyBillComponent,
+    CompanyCreateComponent,
   ]
 })
 export class CoreModule {}

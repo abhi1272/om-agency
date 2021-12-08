@@ -66,13 +66,7 @@
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> NAME </th>
                 <td mat-cell class="cursor-pointer"
-                  [ngClass]="{'strike': element.active === 0}" *matCellDef="let element"> {{element.customer_name ? element.customer_name : element.customer && element.customer.name}} </td>
-              </ng-container>
-  
-              <ng-container matColumnDef="customer_area">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> AREA </th>
-                <td mat-cell class="cursor-pointer"
-                  [ngClass]="{'strike': element.active === 0}" *matCellDef="let element"> {{element.customer_area ? element.customer_area : element.customer && element.customer.area}} </td>
+                  [ngClass]="{'strike': element.active === 0}" *matCellDef="let element"> {{element.company.name}} </td>
               </ng-container>
   
               <ng-container matColumnDef="check_number">
@@ -93,9 +87,16 @@
               </ng-container>
 
               <ng-container matColumnDef="credit_note">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header="credit_note">CN/DB</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="credit_note">Credit N.</th>
                 <td mat-cell class="cursor-pointer" *matCellDef="let element">
                   {{element.credit_note}}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="debit_note">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="debit_note">Debit N.</th>
+                <td mat-cell class="cursor-pointer" *matCellDef="let element">
+                  {{element.debit_note}}
                 </td>
               </ng-container>
   

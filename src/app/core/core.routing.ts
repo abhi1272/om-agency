@@ -8,6 +8,7 @@ import { CompanyComponent } from './components/company/company.component'
 import { CompanyPaymentComponent } from './components/company-payment/company-payment.component'
 import { CreateTableComponent } from './components/create-table/create-table.component'
 import { ViewSummaryComponent } from './components/view-summary/view-summary.component'
+import { CompanyBillComponent } from './components/company-bill/company-bill.component'
 
 export const CoreRoutes: Routes = [
   {
@@ -24,7 +25,11 @@ export const CoreRoutes: Routes = [
   },
   {
     path: 'company-bill',
-    component: BillComponent
+    component: CompanyBillComponent
+  },
+  {
+    path: 'company-bill/:id',
+    component: CompanyBillComponent
   },
   {
     path: 'bill',
@@ -44,6 +49,10 @@ export const CoreRoutes: Routes = [
   },
   {
     path: 'company-payment',
+    component: CompanyPaymentComponent
+  },
+  {
+    path: 'company-payment/:id',
     component: CompanyPaymentComponent
   },
   {

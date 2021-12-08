@@ -76,6 +76,13 @@
           </td>
         </ng-container>
   
+        <ng-container matColumnDef="dueDays" id="my-content">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Due Days </th>
+          <td mat-cell *matCellDef="let row">
+            {{row.dueDays}}
+          </td>
+        </ng-container>
+  
         <!-- Add Bill Column -->
         <ng-container matColumnDef="addBill">
           <th mat-header-cell *matHeaderCellDef> </th>
@@ -94,16 +101,6 @@
               View Bill
             </button>
   
-          </td>
-        </ng-container>
-  
-        <!-- Add Payment Column -->
-        <ng-container matColumnDef="addPayment">
-          <th mat-header-cell *matHeaderCellDef> </th>
-          <td (click)="addPaymentClickHandler(row)" mat-cell *matCellDef="let row">
-            <button mat-raised-button>
-              Add Payment
-            </button>
           </td>
         </ng-container>
   

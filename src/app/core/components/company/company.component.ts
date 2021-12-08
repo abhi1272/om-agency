@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table'
 import { MatPaginator } from '@angular/material/paginator'
 import { Router } from '@angular/router'
 import { CommonService } from '../../services/common.service'
-import { CreateComponent } from 'app/core/shared/modals/create/create.component'
+import { CompanyCreateComponent } from 'app/core/shared/modals/company-create/company-create.component'
 // import jsPDF from 'jspdf'
 // import jsPDF = require('jspdf') // // typescript without esModuleInterop flag
 // import jsPDF from 'yworks-pdf' // using yworks fork
@@ -18,7 +18,7 @@ import { CreateComponent } from 'app/core/shared/modals/create/create.component'
 })
 export class CompanyComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'area' , 'totalBillAmount', 'totalBillAmountLeft', 'addBill', 'viewBill' , 'addPayment', 'viewPayment', 'edit']
+  displayedColumns: string[] = ['id', 'name', 'area' , 'totalBillAmount', 'totalBillAmountLeft', 'dueDays', 'addBill', 'viewBill' , 'viewPayment', 'edit']
   dataSource!: MatTableDataSource<any>
   storeData: any = []
   totalSale = 0
@@ -65,12 +65,11 @@ export class CompanyComponent implements OnInit {
       this.storeData.map((item: any) => {
         item.totalBillAmountLeft = item.totalBillAmount - item.totalPaymentAmount || 0
       })
-      this.filterByPlace([])
       this.dataSource = new MatTableDataSource(this.storeData)
+      this.calculateTotal(this.storeData)
       this.dataSource.paginator = this.paginator
       this.sortedData = this.storeData.slice()
       this.printData = this.storeData.slice()
-      this.getPlaceData()
     }, (error) => {
       console.log(error)
     })
@@ -90,7 +89,7 @@ export class CompanyComponent implements OnInit {
       action: 'create',
       data: {}
     }
-    const value = this.commonService.openDialog(CreateComponent, createModalObj)
+    const value = this.commonService.openDialog(CompanyCreateComponent, createModalObj)
     value.subscribe((data) => {
       if (data) {
         this.getCustomerData()
@@ -108,7 +107,7 @@ export class CompanyComponent implements OnInit {
   }
 
   viewBill(row: any): void {
-    this.router.navigate([`/bill/${row.uuid}`, { page: 'company', name: row.name , place: row.area}])
+    this.router.navigate([`/company-bill/${row.uuid}`, { page: 'company', name: row.name , place: row.area}])
   }
 
   addPaymentClickHandler(row: any): void {
@@ -119,7 +118,7 @@ export class CompanyComponent implements OnInit {
       action: 'create',
       data: row
     }
-    const value = this.commonService.openDialog(CreateComponent, createModalObj, )
+    const value = this.commonService.openDialog(CompanyCreateComponent, createModalObj, )
     value.subscribe((data) => {
       if (data) {
         this.getCustomerData()
@@ -129,13 +128,13 @@ export class CompanyComponent implements OnInit {
 
   addBill(row: any): void {
     const createModalObj = {
-      page: 'bill',
+      page: 'company-bill',
       title: `Add Bill`,
       pages: 'bill',
       action: 'create',
       data: row
     }
-    const value = this.commonService.openDialog(CreateComponent, createModalObj)
+    const value = this.commonService.openDialog(CompanyCreateComponent, createModalObj)
     value.subscribe((data) => {
       if (data) {
         this.getCustomerData()
@@ -151,7 +150,7 @@ export class CompanyComponent implements OnInit {
       action: 'edit',
       data: row
     }
-    const value = this.commonService.openDialog(CreateComponent, editModalObj)
+    const value = this.commonService.openDialog(CompanyCreateComponent, editModalObj)
     value.subscribe((data) => {
       if (data) {
         this.getCustomerData()
@@ -164,7 +163,7 @@ export class CompanyComponent implements OnInit {
     this.totalPaymentReceived = 0
     storeData.map((data: any) => {
       this.totalSale += data.totalBillAmount
-      this.totalPaymentReceived += data.totalPaidAmount
+      this.totalPaymentReceived += data.totalPaymentAmount
     })
   }
 
@@ -181,31 +180,6 @@ export class CompanyComponent implements OnInit {
       })
       this.dataSource = new MatTableDataSource(data)
     }
-  }
-
-  public getPlaceData() {
-    this.commonService.getEntityData('place').subscribe((data) => {
-      this.placeData = data.data
-    }, (error) => {
-      console.log(error)
-    })
-  }
-
-  filterByPlace(placeUuid: any) {
-    this.selectedPlaceUUid = placeUuid
-    let filteredData = this.storeData
-    if (this.selectedPlaceUUid && this.selectedPlaceUUid.length) {
-      filteredData = this.storeData.filter((customer: any) => {
-        if (customer.place && placeUuid.includes(customer.place.uuid)) {
-          return true
-        } else {
-          return false
-        }
-      })
-    }
-
-    this.calculateTotal(filteredData)
-    this.dataSource = new MatTableDataSource(filteredData)
   }
 
   // public download(): any{

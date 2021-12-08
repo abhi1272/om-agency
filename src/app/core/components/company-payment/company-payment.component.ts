@@ -4,11 +4,11 @@ import { MatDialog } from '@angular/material/dialog'
 import { MatTableDataSource } from '@angular/material/table'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
-import { BillService } from '../../services/bill.service'
 import { CommonService } from '../../services/common.service'
 import * as moment from 'moment'
 // import jsPDF from 'jspdf'
-import { CreateComponent } from 'app/core/shared/modals/create/create.component'
+import { CompanyCreateComponent } from 'app/core/shared/modals/company-create/company-create.component'
+import { CompanyService } from 'app/core/services/company.service'
 // import jsPDF = require('jspdf') // // typescript without esModuleInterop flag
 // import jsPDF from 'yworks-pdf' // using yworks fork
 // import jsPDF from 'jspdf/dist/jspdf.node.debug' // for nodejs
@@ -19,7 +19,7 @@ import { CreateComponent } from 'app/core/shared/modals/create/create.component'
   styleUrls: ['./company-payment.component.css']
 })
 export class CompanyPaymentComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'id', 'name', 'customer_area', 'paid_amount', 'check_number', 'date', 'credit_note', 'notes', 'edit', 'delete']
+  displayedColumns: string[] = ['select', 'id', 'name', 'paid_amount', 'check_number', 'date', 'credit_note', 'debit_note', 'notes', 'edit', 'delete']
   dataSource: any
   storedData: any
   customerUuid: any
@@ -33,7 +33,7 @@ export class CompanyPaymentComponent implements OnInit {
 
   // @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog: MatDialog, public toast: ToastrService, public billService: BillService,
+  constructor(public dialog: MatDialog, public toast: ToastrService, public billService: CompanyService,
     public route: ActivatedRoute, public commonService: CommonService,
     public router: Router) {
     this.maxDate = moment().format('YYYY-MM-DD')
@@ -41,14 +41,12 @@ export class CompanyPaymentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const yesterDay = moment().subtract(1, 'days').format('YYYY-MM-DD')
+    // const yesterDay = moment().subtract(1, 'days').format('YYYY-MM-DD')
     this.route.params.subscribe((data) => {
       if (data.page === 'bill') {
         this.billUuid = data.id
       } else if (data.id) {
         this.customerUuid = data.id
-      } else {
-        this.selectedDate = yesterDay
       }
     })
     this.route.queryParams.subscribe((data) => {
@@ -112,7 +110,7 @@ export class CompanyPaymentComponent implements OnInit {
         console.log(error)
       })
     } else if (this.customerUuid) {
-      this.billService.getPaymentsByBill(this.customerUuid, 'customer_uuid').subscribe((data) => {
+      this.billService.getPaymentsByBill(this.customerUuid, 'company_uuid').subscribe((data) => {
         this.storedData = data.data
         // this.sortedData = data;
         this.totalAmount = data.totalAmount
@@ -124,7 +122,7 @@ export class CompanyPaymentComponent implements OnInit {
         console.log(error)
       })
     } else if (this.selectedDate) {
-      this.billService.getPaymentsByDate(this.selectedDate, 'Purchase').subscribe((data) => {
+      this.billService.getPaymentsByDate(this.selectedDate).subscribe((data) => {
         this.storedData = data.data
         this.totalAmount = data.totalAmount
         this.storedData = this.storedData.sort((a: any, b: any) => {
@@ -135,7 +133,7 @@ export class CompanyPaymentComponent implements OnInit {
         console.log(error)
       })
     } else {
-      this.billService.getPaymentALl('Purchase').subscribe((data) => {
+      this.billService.getPaymentALl().subscribe((data) => {
         this.storedData = data.data
         this.totalAmount = data.totalAmount
         // this.sortedData = data;
@@ -158,13 +156,13 @@ export class CompanyPaymentComponent implements OnInit {
 
   public openUserDialog(): any {
     const createModalObj = {
-      page: 'payment',
+      page: 'company-payment',
       title: `Add Payment`,
       pages: 'payment',
       action: 'create',
       data: {uuid: this.customerUuid}
     }
-    const value = this.commonService.openDialog(CreateComponent, createModalObj)
+    const value = this.commonService.openDialog(CompanyCreateComponent, createModalObj)
     value.subscribe((data) => {
       if (data) {
         this.getPaymentData()
@@ -174,13 +172,13 @@ export class CompanyPaymentComponent implements OnInit {
 
   edit(ele: any): void {
     const createModalObj = {
-      page: 'payment',
+      page: 'company-payment',
       title: `Add 'payment`,
       pages: 'payment',
       action: 'edit',
       data: ele
     }
-    const value = this.commonService.openDialog(CreateComponent, createModalObj)
+    const value = this.commonService.openDialog(CompanyCreateComponent, createModalObj)
     value.subscribe((data) => {
       if (data) {
         this.getPaymentData()
@@ -190,10 +188,10 @@ export class CompanyPaymentComponent implements OnInit {
 
 
   delete(ele: any): void {
-    const value = this.commonService.openDialog(CreateComponent, { page: 'confirm' })
+    const value = this.commonService.openDialog(CompanyCreateComponent, { page: 'confirm' })
     value.subscribe((data) => {
       if (data) {
-        this.commonService.deleteData('payment', ele.uuid).subscribe(() => {
+        this.commonService.deleteData('company-payment', ele.uuid).subscribe(() => {
           this.toast.success('Payment deleted successfully')
           this.getPaymentData()
         }, (error) => {

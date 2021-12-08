@@ -4,12 +4,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { ToastrService } from 'ngx-toastr'
 import * as moment from 'moment'
 import { CommonService } from 'app/core/services/common.service'
+
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-company-create',
+  templateUrl: './company-create.component.html',
+  styleUrls: ['./company-create.component.css']
 })
-export class CreateComponent implements OnInit {
+export class CompanyCreateComponent implements OnInit {
 
   constructor(public toast: ToastrService, public dialogRef: MatDialogRef<any>,
     public commonService: CommonService, @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -18,45 +19,37 @@ export class CreateComponent implements OnInit {
   createForm: any
   query: any
   entityData: any
-  expensesCategory = []
-  places = []
   today: any
-  loading = false
   ngOnInit(): void {
     console.log('data', this.data)
     this.today = moment().format('YYYY-MM-DD')
     const yesterDay = moment().subtract(1, 'days').format('YYYY-MM-DD')
     const selectedDefaultDate = yesterDay
-    if (this.data.page === 'customer') {
-      this.getPlaceData()
-      this.createForm = new FormGroup({
-        name: new FormControl('', Validators.required),
-        area: new FormControl('', Validators.required),
-        place: new FormControl('', Validators.required),
-        customer_type: new FormControl('', Validators.required),
-        phoneNumber: new FormControl(''),
-        notes: new FormControl(''),
-      })
-    } else if (this.data.page === 'payment') {
-      this.createForm = new FormGroup({
-        payment_date: new FormControl(selectedDefaultDate, Validators.required),
-        paid_amount: new FormControl('', Validators.required),
-        notes: new FormControl(''),
-      })
-    } else if (this.data.page === 'bill') {
+    if (this.data.page === 'company-bill') {
       this.createForm = new FormGroup({
         bill_no: new FormControl('', Validators.required),
         bill_amount: new FormControl('', Validators.required),
-        bill_date: new FormControl(selectedDefaultDate, Validators.required),
+        bill_date: new FormControl('', Validators.required),
+        trDate: new FormControl('', Validators.required),
         notes: new FormControl(''),
       })
-    } else if (this.data.page === 'expense') {
-      this.getCategoryData()
+    } else if (this.data.page === 'company') {
       this.createForm = new FormGroup({
-        expenses_date: new FormControl('', Validators.required),
-        amount: new FormControl('', Validators.required),
-        type: new FormControl('', Validators.required),
-        notes: new FormControl('', Validators.required),
+        name: new FormControl('', Validators.required),
+        area: new FormControl('', Validators.required),
+        dueDays: new FormControl('', Validators.required),
+        phoneNumber: new FormControl(''),
+        email: new FormControl(''),
+        notes: new FormControl(''),
+      })
+    } else if (this.data.page === 'company-payment') {
+      this.createForm = new FormGroup({
+        payment_date: new FormControl('', Validators.required),
+        paid_amount: new FormControl('', Validators.required),
+        check_number: new FormControl('', Validators.required),
+        credit_note: new FormControl(''),
+        debit_note: new FormControl(''),
+        notes: new FormControl(''),
       })
     }
 
@@ -64,6 +57,7 @@ export class CreateComponent implements OnInit {
       this.createForm.patchValue({
         ...this.data.data,
         bill_date: this.covertDateFormate(this.data.data.bill_date),
+        trDate: this.covertDateFormate(this.data.data.trDate),
         payment_date: this.covertDateFormate(this.data.data.payment_date),
       })
     }
@@ -78,26 +72,17 @@ export class CreateComponent implements OnInit {
   }
 
   createData(): void {
-    this.loading = true
-    // if (this.data.pages === 'customer') {
-      this.createForm.value.customer_uuid = this.data.data.uuid
-    // }
-    if (this.data.data && this.data.data.customer_uuid) {
-      this.createForm.value.customer_uuid = this.data.data.customer_uuid
+    this.createForm.value.company_uuid = this.data.data.uuid
+
+    if (this.data.data && this.data.data.company_uuid) {
+      this.createForm.value.company_uuid = this.data.data.company_uuid
     }
 
     if (this.data.data && this.data.data.bill_uuid) {
       this.createForm.value.bill_uuid = this.data.data.bill_uuid
     }
 
-
-    if (this.data.page === 'company') {
-      this.createForm.value.type = 'Purchase'
-    } else if (this.data.page === 'customer') {
-      this.createForm.value.type = 'Sale'
-    }
-
-    if (this.data.page === 'payment') {
+    if (this.data.page === 'company-payment') {
       this.createForm.value.payment_date = this.covertDateIntoTimeStamp(this.createForm.value.payment_date)
       const payments = `${this.createForm.value.paid_amount}`.split(',')
       payments.map((payment) => {
@@ -105,16 +90,16 @@ export class CreateComponent implements OnInit {
           this.createForm.value.paid_amount = +payment
           this.addEntityData()
         } else {
-          this.loading = false
           this.toast.warning('Enter amount as number')
         }
       })
     }
-    if (this.data.page === 'bill') {
+    if (this.data.page === 'company-bill') {
       this.createForm.value.bill_date = this.covertDateIntoTimeStamp(this.createForm.value.bill_date)
+      this.createForm.value.trDate = this.covertDateIntoTimeStamp(this.createForm.value.trDate)
     }
 
-    if (this.data.page !== 'payment') {
+    if (this.data.page !== 'company-payment') {
       this.addEntityData()
     }
   }
@@ -122,11 +107,9 @@ export class CreateComponent implements OnInit {
   addEntityData(): void {
     this.commonService.addEntityData(this.data.page, this.createForm.value).subscribe((data) => {
       this.toast.success(`${this.data.page} successfully added`)
-      this.loading = true
       this.dialogRef.close(true)
     }, (error) => {
       this.toast.error(error)
-      this.loading = true
       this.dialogRef.close(false)
     })
   }
@@ -135,10 +118,8 @@ export class CreateComponent implements OnInit {
     this.commonService.editData(this.data.page, this.data.data.uuid, this.createForm.value).subscribe((data) => {
       this.toast.success('Update successful')
       this.dialogRef.close(true)
-      this.loading = true
     }, (error) => {
       this.toast.error(error)
-      this.loading = true
       this.dialogRef.close(false)
     })
   }
@@ -154,28 +135,6 @@ export class CreateComponent implements OnInit {
 
   public confirm(): void {
     this.dialogRef.close(true)
-  }
-
-  public getCategoryData(): void {
-    this.commonService.getEntityData('category').subscribe((data) => {
-      this.expensesCategory = data.data
-    }, (error) => {
-      console.log(error)
-    })
-  }
-
-  public getPlaceData(): void {
-    this.commonService.getEntityData('place').subscribe((data) => {
-      this.places = data.data.map((item: any) => {
-        return {
-          name: item.name,
-          uuid: item.uuid
-        }
-      })
-      console.log(this.places)
-    }, (error) => {
-      console.log(error)
-    })
   }
 
   compareFn(optionOne: any, optionTwo: any): boolean {
