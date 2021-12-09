@@ -138,7 +138,7 @@ checkboxLabel(row?: any): string {
         console.log(error)
       })
     } else if (!this.customerUuid) {
-      this.commonService.getEntityData('bill', this.type).subscribe((data) => {
+      this.commonService.getEntityData('bill').subscribe((data) => {
         this.storeData = data.data
         this.totalBillAmount = data.totalAmount
         this.dataSource = new MatTableDataSource(this.storeData)
