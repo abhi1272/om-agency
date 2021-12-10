@@ -25,7 +25,7 @@ export class CommonService {
   }
 
   createTable(data): Observable<any> {
-    return this.http.post(`${this.apiUrl}/createTable`, data)
+    return this.http.post(`${this.apiUrl}/design/table`, data)
   }
 
   // CRUD
