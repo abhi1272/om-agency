@@ -162,8 +162,8 @@ export class CompanyComponent implements OnInit {
     this.totalSale = 0
     this.totalPaymentReceived = 0
     storeData.map((data: any) => {
-      this.totalSale += data.totalBillAmount
-      this.totalPaymentReceived += data.totalPaymentAmount
+      this.totalSale += data.totalBillAmount || 0
+      this.totalPaymentReceived += data.totalPaymentAmount || 0
     })
   }
 

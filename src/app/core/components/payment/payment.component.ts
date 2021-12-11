@@ -19,7 +19,7 @@ import { CreateComponent } from 'app/core/shared/modals/create/create.component'
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-  displayedColumns: string[] = [ 'id', 'name', 'customer_area', 'paid_amount', 'date', 'notes', 'edit', 'delete']
+  displayedColumns: string[] = [ 'id', 'select', 'name', 'customer_area', 'paid_amount', 'date', 'notes', 'edit', 'delete']
   dataSource: any
   storedData: any
   customerUuid: any
