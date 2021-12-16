@@ -3,10 +3,13 @@
       <mat-label>Search Customer/Bill</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Google" #input>
     </mat-form-field>
-    <mat-form-field class="col-sm-4" appearance="outline">
+    <div class="col-sm-3 mt-2">
+      <app-multi-date-picker></app-multi-date-picker>
+    </div>
+    <!-- <mat-form-field class="col-sm-4" appearance="outline">
       <mat-label>Choose a date</mat-label>
       <input (change)="getBillData($event.target.value)" [value]="selectedDate" matInput type="date" [min]="minDate" [max]="maxDate">
-    </mat-form-field>
+    </mat-form-field> -->
   </div>
   
   

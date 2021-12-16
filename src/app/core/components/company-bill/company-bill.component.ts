@@ -124,9 +124,9 @@ checkboxLabel(row?: any): string {
         this.storeData = data.data
         this.storeData = this.storeData.filter((bill: { customer: { type: string } }) => bill.customer.type !== 'company')
         this.totalBillAmount = data.totalAmount
-        this.storeData = this.storeData.sort((a: any, b: any) => {
-          return new Date(b.bill_date).getTime() - new Date(a.bill_date).getTime()
-        })
+        // this.storeData = this.storeData.sort((a: any, b: any) => {
+        //   return new Date(b.bill_date).getTime() - new Date(a.bill_date).getTime()
+        // })
         this.dataSource = new MatTableDataSource(this.storeData)
       }, (error) => {
         console.log(error)
@@ -145,9 +145,9 @@ checkboxLabel(row?: any): string {
         this.storeData.map((bill: any) => {
           this.totalBillAmount += bill.bill_amount
         })
-        this.storeData = this.storeData.sort((a: any, b: any) => {
-          return new Date(b.bill_date).getTime() - new Date(a.bill_date).getTime()
-        })
+        // this.storeData = this.storeData.sort((a: any, b: any) => {
+        //   return new Date(b.bill_date).getTime() - new Date(a.bill_date).getTime()
+        // })
         this.dataSource = new MatTableDataSource(this.storeData)
       }, (error) => {
         console.log(error)
@@ -158,10 +158,10 @@ checkboxLabel(row?: any): string {
   getFilteredData(event: any): void {
     this.dataSource = event.data ? event.data : event
     this.totalAmount = event.totalAmount ? event.totalAmount : 0
-    let filteredData = event.data ? event.data : event
-    filteredData = filteredData.sort((a: any, b: any) => {
-      return new Date(a.bill_date).getTime() - new Date(b.bill_date).getTime()
-    })
+    // let filteredData = event.data ? event.data : event
+    // filteredData = filteredData.sort((a: any, b: any) => {
+    //   return new Date(a.bill_date).getTime() - new Date(b.bill_date).getTime()
+    // })
   }
 
   openUserDialog(): any {
