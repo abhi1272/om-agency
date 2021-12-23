@@ -31,6 +31,7 @@ export class CompanyBillComponent implements OnInit {
   maxDate: any
   picker: any
   type
+  preDefinedDateObj: any
   selection = new SelectionModel<any>(true, [])
   @ViewChild(MatPaginator) paginator: MatPaginator | any
   @ViewChild(MatSort) sort: MatSort | any
@@ -119,19 +120,7 @@ checkboxLabel(row?: any): string {
         })
         this.selectedDate = filter
     }
-    if (this.selectedDate) {
-      this.billService.getBillsByDate(this.selectedDate).subscribe((data) => {
-        this.storeData = data.data
-        this.storeData = this.storeData.filter((bill: { customer: { type: string } }) => bill.customer.type !== 'company')
-        this.totalBillAmount = data.totalAmount
-        // this.storeData = this.storeData.sort((a: any, b: any) => {
-        //   return new Date(b.bill_date).getTime() - new Date(a.bill_date).getTime()
-        // })
-        this.dataSource = new MatTableDataSource(this.storeData)
-      }, (error) => {
-        console.log(error)
-      })
-    } else if (!this.customerUuid) {
+    if (!this.customerUuid) {
       this.commonService.getEntityData('company-bill').subscribe((data) => {
         this.storeData = data.data
         this.totalBillAmount = data.totalAmount
@@ -232,5 +221,18 @@ checkboxLabel(row?: any): string {
 
   viewCustomerPayment(customer_uuid) {
     this.router.navigate([`/company-payment/${customer_uuid}`, { page: 'customer'}])
+  }
+
+  public getSelectedDated(event) {
+    console.log('event', event)
+    this.preDefinedDateObj = event
+    this.getDayWiseData()
+  }
+
+  public getDayWiseData() {
+    this.billService.getBillsByDate(this.preDefinedDateObj.start_date, this.preDefinedDateObj.end_date).subscribe((data) => {
+      this.dataSource = data.data
+      this.totalBillAmount = data.totalAmount
+    })
   }
 }

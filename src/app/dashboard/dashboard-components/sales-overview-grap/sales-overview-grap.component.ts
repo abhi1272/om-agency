@@ -38,6 +38,7 @@ export class SalesOverviewGrapComponent implements OnInit {
   }
 
   constructor() {
+    console.log(this.dailyData)
   }
 
  onSelect(data): void {

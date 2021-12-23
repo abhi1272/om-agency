@@ -4,7 +4,7 @@
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Google" #input>
     </mat-form-field>
     <div class="col-sm-3 mt-2">
-      <app-multi-date-picker></app-multi-date-picker>
+      <app-multi-date-picker (sendSelectedDated)="getSelectedDated($event)"></app-multi-date-picker>
     </div>
     <!-- <mat-form-field class="col-sm-4" appearance="outline">
       <mat-label>Choose a date</mat-label>

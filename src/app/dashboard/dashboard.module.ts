@@ -15,6 +15,7 @@ import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker
 import {SearchPipe} from '../core/shared/search.pipe'
 import { AngularMaterialModule } from 'app/shared/angular-material.module';
 import { AreaOverviewGraphComponent } from './dashboard-components/area-overview-graph/area-overview-graph.component';
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { AreaOverviewGraphComponent } from './dashboard-components/area-overview
     FlexLayoutModule,
     ChartistModule,
     NgxChartsModule,
+    SharedModule,
     RouterModule.forChild(DashboardRoutes),
     BsDatepickerModule.forRoot()
   ],

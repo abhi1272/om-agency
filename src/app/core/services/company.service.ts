@@ -22,8 +22,8 @@ export class CompanyService {
     return this.http.get(`${this.apiUrl}/company-payment?payment_date=${date}`)
   }
 
-  getBillsByDate(date: any): Observable<any> {
-    return this.http.get(`${this.apiUrl}/company-bill?bill_date=${date}`)
+  getBillsByDate(start_date: any, end_date: any): Observable<any> {
+    return this.http.get(`${this.apiUrl}/company-bill?start_date=${start_date}&end_date=${end_date}`)
   }
 
   getPaymentALl(): Observable<any> {

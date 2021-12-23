@@ -61,14 +61,7 @@
 
 <div class="row ml-1 mb-2">
   <div class="col-sm-3 mt-2" *ngIf="dateType === 'daily'">
-    <input  type="text" class="form-control" placeholder="Date From - To" bsDaterangepicker                       
-    (bsValueChange)="datepickerValueChange($event)"
-    [maxDate]="datepickerMaxDate"
-    [bsConfig]="datepickerConfig" style="min-height: 30px;  line-height: 1rem; font-size: .9rem; height: 34px; border-width: 2px;">
-    <!-- <mat-form-field appearance="outline">
-      <input matInput [bsValue]="setDateValue" placeholder="Date From - To" bsDaterangepicker (bsValueChange)="datepickerValueChange($event)"
-      [bsConfig]="datepickerConfig">
-    </mat-form-field> -->
+      <app-multi-date-picker (sendSelectedDated)="getSelectedDated($event)"></app-multi-date-picker>
   </div>
  
   <div class="col-sm-4">

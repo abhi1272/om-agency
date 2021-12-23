@@ -10,6 +10,9 @@ import { JsonTableCreationComponent } from './json-table/json-table-creation/jso
 import { ColFilterComponent } from './json-table/col-filter/col-filter.component';
 import { AddRemoveColComponent } from './json-table/add-remove-col/add-remove-col.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { MultiDatePickerComponent } from './UI/multi-date-picker/multi-date-picker.component'
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
+
 @NgModule({
   declarations: [
     AccordionAnchorDirective,
@@ -19,12 +22,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     JsonTableCreationComponent,
     ColFilterComponent,
     AddRemoveColComponent,
+    MultiDatePickerComponent
   ],
   imports: [
     CommonModule,
     AngularMaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    BsDatepickerModule.forRoot(),
+    FormsModule,
   ],
   exports: [
     AccordionAnchorDirective,
@@ -34,6 +39,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     JsonTableCreationComponent,
     ColFilterComponent,
     AddRemoveColComponent,
+    MultiDatePickerComponent
   ],
   providers: [MenuItems]
 })

@@ -78,6 +78,11 @@ export class DashboardComponent implements OnInit, OnChanges {
     this.getDayWiseData()
   }
 
+  public getSelectedDated(event) {
+    this.preDefinedDateObj = event
+    this.getDayWiseData()
+  }
+
   public getDayWiseData() {
     this.dashboardService.getDayWiseData(this.preDefinedDateObj, this.selectedCustomerData, this.currentSelectType, this.transaction_type
       ).subscribe((data) => {
