@@ -75,6 +75,7 @@ export class CustomerComponent implements OnInit {
       this.storeData.map((item: any) => {
         item.totalBillAmountLeft = (item.totalBillAmount - (item.totalPaymentAmount || 0))
       })
+      this.storeData.sort((a, b) => b.totalBillAmountLeft - a.totalBillAmountLeft)
       this.filterByPlace([])
       this.dataSource = new MatTableDataSource(this.storeData)
       this.dataSource.paginator = this.paginator
@@ -116,7 +117,9 @@ export class CustomerComponent implements OnInit {
 
   showSummary(row): void {
     this.commonService.openDialog(ViewSummaryComponent, row, '850px').subscribe((data) => {
-      this.getCustomerData()
+      if (data) {
+        this.getCustomerData()
+      }
     })
   }
 

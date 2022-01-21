@@ -1,0 +1,104 @@
+<div class="report">
+    <div class="row mb-2 ml-2">
+        <div class="col-sm-1">
+            <button mat-raised-button [ngClass]="{'btn-primary': dateType === 'daily'}"
+                (click)="getDayWiseData()">Daily</button>
+        </div>
+        <div class="col-sm-1">
+            <button mat-raised-button [ngClass]="{'btn-primary': dateType === 'monthly'}"
+                (click)="getMonthlyData()">Monthly</button>
+        </div>
+        <!-- <div class="col-sm-1"></div>
+        <div class="col-sm-1">
+            <button mat-raised-button [ngClass]="{'btn-primary': transaction_type === 'Sale'}"
+                (click)="getTransactionData('Sale')">Sale</button>
+        </div>
+        <div class="col-sm-1">
+            <button mat-raised-button [ngClass]="{'btn-primary': transaction_type === 'Purchase'}"
+                (click)="getTransactionData('Purchase')">Purchase</button>
+        </div> -->
+    </div>
+    
+    <div class="row ml-1 mb-2">
+        <div class="col-sm-3 mt-2" *ngIf="dateType === 'daily'">
+            <app-multi-date-picker (sendSelectedDated)="getSelectedDated($event)"></app-multi-date-picker>
+        </div>
+    
+        <div class="col-sm-4">
+            <mat-form-field appearance="outline">
+                <mat-label style="padding: 12px;">Select Customer</mat-label>
+                <mat-select formControlName="customer_uuid" multiple
+                    (selectionChange)="getCustomerMonthlyData($event, 'customer_uuid')">
+                    <div class="form-group" style="padding: 8px;">
+                        <input type="text" class="form-control" (keyup)="onKey($event)" placeholder="Find Customer">
+                    </div>
+    
+                    <mat-option *ngFor="let customer of customerData | search : {query:query, field: 'name'}"
+                        [value]="customer.uuid">
+                        {{customer.name}} - {{customer.area}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-sm-4">
+            <mat-form-field appearance="outline">
+                <mat-label style="padding: 12px;">Select Place</mat-label>
+                <mat-select formControlName="customer_uuid" multiple
+                    (selectionChange)="getCustomerMonthlyData($event, 'place_uuid')">
+                    <mat-option *ngFor="let place of placeData" [value]="place.uuid">
+                        {{place.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <div fxLayout="row" *ngIf="dateType === 'daily'">
+        <div class="table-responsive ml-3">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <!-- <th scope="col"></th> -->
+                        <th scope="col">Date</th>
+                        <th scope="col">Payment</th>
+                        <th scope="col">Bill</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of dataSource;let i = index">
+                        <!-- <th scope="row">{{i + 1}}</th> -->
+                        <td *ngIf="row.payment_date !== 'Total'">{{row.payment_date | date: commonService.dateFormat}}</td>
+                        <td *ngIf="row.payment_date === 'Total'"><b style="font-size: 1.5rem;">{{row.payment_date}}</b></td>
+                        <td matTooltip="click to see all payments" class="cursor-pointer"
+                            (click)="showFullData(row, '/payment')">{{row.totalPaymentAmount | currency: 'INR' }}</td>
+                        <td matTooltip="click to see all bills" class="cursor-pointer" (click)="showFullData(row, '/bill')">
+                            {{row.totalBillAmount | currency: 'INR'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div fxLayout="row" *ngIf="dateType === 'monthly'">
+        <div class="table-responsive ml-3">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <!-- <th scope="col"></th> -->
+                        <th scope="col">Month</th>
+                        <th scope="col">Payment</th>
+                        <th scope="col">Bill</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of monthlyData;let i = index">
+                        <!-- <th scope="row">{{i + 1}}</th> -->
+                        <td>{{row.month}}</td>
+                        <td>{{row.payment_amount | currency: 'INR' }}</td>
+                        <td>{{row.bill_amount | currency: 'INR' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

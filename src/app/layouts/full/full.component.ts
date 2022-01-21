@@ -13,6 +13,7 @@ import { MenuItems } from '../../shared/menu-items/menu-items';
 export class FullComponent implements OnDestroy, AfterViewInit {
   mobileQuery: MediaQueryList;
   user: any
+  orgData
 
   private _mobileQueryListener: () => void;
 
@@ -26,10 +27,22 @@ export class FullComponent implements OnDestroy, AfterViewInit {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
     this.user = this.userService.getUser()
+    this.getOrgData()
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
+
+  getOrgData(): void {
+    console.log(this.user)
+    const orgId = this.user.orgId
+    this.userService.getOrgData(orgId).subscribe((data) => {
+      this.orgData = data.data
+    }, (error) => {
+      console.log(error)
+    })
+  }
+
   ngAfterViewInit() {}
 }

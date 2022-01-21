@@ -19,19 +19,17 @@ import { ExpenseComponent } from './components/expense/expense.component'
 import { CompanyComponent } from './components/company/company.component'
 import { CompanyPaymentComponent } from './components/company-payment/company-payment.component'
 import { CreateComponent } from './shared/modals/create/create.component'
-import { AngularMaterialModule } from 'app/shared/angular-material.module';
-import { ReportComponent } from './components/report/report.component';
 import { CreateTableComponent } from './components/create-table/create-table.component'
 import { SharedModule } from 'app/shared/shared.module';
 import { ViewSummaryComponent } from './components/view-summary/view-summary.component';
 import { CompanyBillComponent } from './components/company-bill/company-bill.component';
 import { CompanyCreateComponent } from './shared/modals/company-create/company-create.component'
+import { ReportComponent } from 'app/report/report.component'
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(CoreRoutes),
-    AngularMaterialModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -49,7 +47,6 @@ import { CompanyCreateComponent } from './shared/modals/company-create/company-c
     ExpenseComponent,
     CompanyComponent,
     CompanyPaymentComponent,
-    ReportComponent,
     CreateTableComponent,
     ViewSummaryComponent,
     CompanyBillComponent,

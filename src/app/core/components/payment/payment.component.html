@@ -77,7 +77,7 @@
             <ng-container matColumnDef="customer_area">
               <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> AREA </th>
               <td mat-cell class="cursor-pointer"
-                [ngClass]="{'strike': element.active === 0}" *matCellDef="let element"> {{element.customer_area ? element.customer_area : element.customer && element.customer.area}} </td>
+                [ngClass]="{'strike': element.active === 0}" *matCellDef="let element"> {{element.customer.place && element.customer.place.name}} </td>
             </ng-container>
 
             <!-- Weight Column -->

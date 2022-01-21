@@ -12,27 +12,26 @@ import { ContactsComponent } from './dashboard-components/contacts/contacts.comp
 import { ActivityComponent } from './dashboard-components/activity/activity.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker'
-import {SearchPipe} from '../core/shared/search.pipe'
-import { AngularMaterialModule } from 'app/shared/angular-material.module';
 import { AreaOverviewGraphComponent } from './dashboard-components/area-overview-graph/area-overview-graph.component';
 import { SharedModule } from 'app/shared/shared.module';
+import { ReportModule } from 'app/report/report.module';
 
 @NgModule({
   imports: [
     CommonModule,
     // DemoMaterialModule,
-    AngularMaterialModule,
     FlexLayoutModule,
     ChartistModule,
     NgxChartsModule,
     SharedModule,
+    ReportModule,
     RouterModule.forChild(DashboardRoutes),
     BsDatepickerModule.forRoot()
   ],
   providers: [
     BsDatepickerConfig
   ],
-  declarations: [DashboardComponent, SearchPipe,
+  declarations: [DashboardComponent,
      SalesOverviewGrapComponent,
      StickerComponent, ContactsComponent, ActivityComponent, AreaOverviewGraphComponent
     ]

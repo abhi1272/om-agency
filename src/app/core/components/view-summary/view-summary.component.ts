@@ -35,7 +35,7 @@ export class ViewSummaryComponent implements OnInit {
     }
   }
 
-  close() {
-    this.dialogRef.close(true)
+  close(flag) {
+    this.dialogRef.close(flag)
   }
 }

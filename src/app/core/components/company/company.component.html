@@ -93,6 +93,16 @@
   
           </td>
         </ng-container>
+
+        <ng-container matColumnDef="addPayment">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td (click)="addPaymentClickHandler(row)" mat-cell *matCellDef="let row">
+            <button mat-raised-button>
+              Add Payment
+            </button>
+  
+          </td>
+        </ng-container>
   
         <ng-container matColumnDef="viewBill">
           <th mat-header-cell *matHeaderCellDef> </th>

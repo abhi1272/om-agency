@@ -9,7 +9,7 @@ export interface Menu {
 
 const MENUITEMS = [
   { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'dashboard' },
-  // { state: 'report', name: 'Report', type: 'link', icon: 'summarize' },
+  { state: 'report', name: 'Report', type: 'link', icon: 'summarize' },
   { state: 'sale', name: 'Sale', type: 'link', icon: 'sell', subMenu: [
     { state: 'customer', name: 'Customer', type: 'link', icon: 'person' },
     { state: 'bill', name: 'Bill', type: 'link', icon: 'receipt' },
@@ -21,6 +21,7 @@ const MENUITEMS = [
     { state: 'company-payment', name: 'Payment', type: 'link', icon: 'payment' },
   ] },
   { state: 'entity/expense', name: 'Expense', type: 'link', icon: 'money' },
+  { state: 'entity/place', name: 'Place', type: 'link', icon: 'home' },
   { state: 'table', name: 'Table', type: 'link', icon: 'store' }
 ]
 

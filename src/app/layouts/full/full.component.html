@@ -10,7 +10,7 @@
         <!-- Logo - style you can find in header.scss -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" routerLink="/dashboard">
                 <!-- Logo icon --><b>
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
@@ -20,13 +20,14 @@
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text -->
-                <span fxShow="false" fxShow.gt-xs>
-                    <strong class="ml-4" style="color: white;"></strong>
+                <span fxShow="false" fxShow.gt-xs *ngIf="orgData">
+                    <strong class="ml-4" style="color: white;">{{orgData.name | uppercase}}</strong>
                  <!-- dark Logo text -->
                  <!-- <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo"> -->
                  <!-- Light Logo text -->
                  <!-- <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage"> -->
-                </span> </a>
+                </span> 
+            </a>
         </div>
         <!-- ============================================================== -->
         <!-- sidebar toggle -->

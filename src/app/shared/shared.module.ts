@@ -12,6 +12,7 @@ import { AddRemoveColComponent } from './json-table/add-remove-col/add-remove-co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MultiDatePickerComponent } from './UI/multi-date-picker/multi-date-picker.component'
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
+import { SearchPipe } from './pipes/search.pipe'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
     JsonTableCreationComponent,
     ColFilterComponent,
     AddRemoveColComponent,
-    MultiDatePickerComponent
+    MultiDatePickerComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
     JsonTableCreationComponent,
     ColFilterComponent,
     AddRemoveColComponent,
-    MultiDatePickerComponent
+    MultiDatePickerComponent,
+    SearchPipe,
+    AngularMaterialModule
   ],
   providers: [MenuItems]
 })

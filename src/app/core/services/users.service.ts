@@ -21,6 +21,10 @@ export class UsersService {
   //   return this.http.post(`${this.apiUrl}/validate_signup_attempt`, obj)
   // };
 
+  getOrgData(uuid: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/organization/${uuid}`)
+  }
+
   signUp(user: Object) {
     return this.http.post(`${this.apiUrl}/user/signup`, user)
       .pipe(map(({ data }: any) => {

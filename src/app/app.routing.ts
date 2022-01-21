@@ -18,6 +18,12 @@ export const AppRoutes: Routes = [
       {
         path: '',
         loadChildren:
+          () => import('./report/report.module').then(m => m.ReportModule),
+        canActivateChild: [AuthGuard]
+      },
+      {
+        path: '',
+        loadChildren:
           () => import('./core/core.module').then(m => m.CoreModule),
         canActivateChild: [AuthGuard]
       },

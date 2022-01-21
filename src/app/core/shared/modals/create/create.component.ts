@@ -91,11 +91,11 @@ export class CreateComponent implements OnInit {
     }
 
 
-    if (this.data.page === 'company') {
-      this.createForm.value.type = 'Purchase'
-    } else if (this.data.page === 'customer') {
-      this.createForm.value.type = 'Sale'
-    }
+    // if (this.data.page === 'company') {
+    //   this.createForm.value.type = 'Purchase'
+    // } else if (this.data.page === 'customer') {
+    //   this.createForm.value.type = 'Sale'
+    // }
 
     if (this.data.page === 'payment') {
       this.createForm.value.payment_date = this.covertDateIntoTimeStamp(this.createForm.value.payment_date)

@@ -9,6 +9,6 @@
     <app-bill *ngIf="page === 'bill'" [customerData]="data" [setDisplayedColumns]="setDisplayedColumns"></app-bill>
 </div>
 <div mat-dialog-actions class="float-right mb-1">
-    <button type="button" mat-button (click)="close()" class="btn btn-light mr-4" data-dismiss="modal">Close</button>
-    <!-- <button mat-button type="button" class="btn btn-primary">Save</button> -->
+    <button type="button" mat-button (click)="close(false)" class="btn btn-light mr-4" data-dismiss="modal">Close</button>
+    <button mat-button type="button"  (click)="close(true)" class="btn btn-primary">Save</button>
 </div>
