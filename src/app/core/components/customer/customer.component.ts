@@ -20,7 +20,7 @@ import { ViewSummaryComponent } from 'app/core/components/view-summary/view-summ
 })
 export class CustomerComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'area' , 'place', 'totalBillAmount', 'totalBillAmountLeft', 'addBill', 'viewBill' , 'addPayment', 'viewPayment', 'edit', 'delete']
+  displayedColumns: string[] = ['id', 'name', 'area' , 'totalBillAmount', 'totalBillAmountLeft', 'addBill', 'viewBill' , 'addPayment', 'viewPayment', 'edit', 'delete']
   dataSource!: MatTableDataSource<any>
   storeData: any = []
   totalSale = 0

@@ -46,12 +46,12 @@
 <app-report></app-report>
 
 
-<div class="row">
+<div class="row hide-table">
   <div *ngIf="dataSource && dataSource.length" class="col-12" >
     <app-sales-overview-grap [dailyData]="dataSource"></app-sales-overview-grap>
   </div>
 </div>
-<div class="row">
+<div class="row hide-table">
   <app-area-overview-graph class="col-12"></app-area-overview-graph>
 </div>
 
