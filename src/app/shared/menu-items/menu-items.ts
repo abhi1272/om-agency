@@ -22,7 +22,7 @@ const MENUITEMS = [
   ] },
   { state: 'entity/expense', name: 'Expense', type: 'link', icon: 'money' },
   { state: 'entity/place', name: 'Place', type: 'link', icon: 'home' },
-  { state: 'table', name: 'Table', type: 'link', icon: 'store' }
+  // { state: 'table', name: 'Table', type: 'link', icon: 'store' }
 ]
 
 @Injectable()

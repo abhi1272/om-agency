@@ -12,13 +12,13 @@ export class DashboardService {
 
   getDayWiseData(dateObj: any, filter: any, type: string, transaction_type: string): Observable<any> {
     if (filter) {
-      return this.http.get(`${this.apiUrl}/dashboard/daily?start_date=${dateObj.start_date}&&end_date=${dateObj.end_date}&${type}=${JSON.stringify(filter)}&transaction_type=${transaction_type}`)
+      return this.http.get(`${this.apiUrl}/dashboard/daily?start_date=${dateObj.start_date}&&end_date=${dateObj.end_date}&${type}=${JSON.stringify(filter)}`)
     }
-    return this.http.get(`${this.apiUrl}/dashboard/daily?start_date=${dateObj.start_date}&&end_date=${dateObj.end_date}&&transaction_type=${transaction_type}`)
+    return this.http.get(`${this.apiUrl}/dashboard/daily?start_date=${dateObj.start_date}&&end_date=${dateObj.end_date}`)
   }
 
   getTotalData(transaction_type?): Observable<any> {
-    return this.http.get(`${this.apiUrl}/dashboard/total?transaction_type=${transaction_type}`)
+    return this.http.get(`${this.apiUrl}/dashboard/total`)
   }
 
   getDataByArea(): Observable<any> {
@@ -28,10 +28,8 @@ export class DashboardService {
   getMonthlyData(filter: Array<string>, type: string, transaction_type: string): Observable<any> {
     if (filter) {
       return this.http.get(`${this.apiUrl}/dashboard/monthly?${type}=${JSON.stringify(filter)}`)
-    } else if (transaction_type) {
-      return this.http.get(`${this.apiUrl}/dashboard/monthly?transaction_type=${transaction_type}`)
-    } else if (filter && transaction_type) {
-      return this.http.get(`${this.apiUrl}/dashboard/monthly?${type}=${JSON.stringify(filter)}&transaction_type=${transaction_type}`)
+    } else if (filter) {
+      return this.http.get(`${this.apiUrl}/dashboard/monthly?${type}=${JSON.stringify(filter)}`)
     }
     return this.http.get(`${this.apiUrl}/dashboard/monthly`)
   }
