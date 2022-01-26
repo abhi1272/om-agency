@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit, OnChanges {
     this.getDayWiseData()
     this.getDayTotalData()
     this.getCustomerData()
-    this.getPlaceData()
+    // this.getPlaceData()
   }
 
   public datepickerValueChange(dateRange: any): void {
