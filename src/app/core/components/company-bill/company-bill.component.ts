@@ -130,7 +130,7 @@ checkboxLabel(row?: any): string {
       })
     } else {
       this.billService.getBillByCustomer(this.customerUuid).subscribe((data) => {
-        this.storeData = data
+        this.storeData = data.data
         this.storeData.map((bill: any) => {
           this.totalBillAmount += bill.bill_amount
         })
