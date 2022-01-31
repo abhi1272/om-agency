@@ -64,6 +64,8 @@ export class CompanyComponent implements OnInit {
       this.storeData = data.data
       this.loading = false
       this.storeData.map((item: any) => {
+        item.totalBillAmount = Math.round(item.totalBillAmount)
+        item.totalPaymentAmount = Math.round(item.totalPaymentAmount)
         item.totalBillAmountLeft = item.totalBillAmount - item.totalPaymentAmount || 0
       })
       this.dataSource = new MatTableDataSource(this.storeData)
