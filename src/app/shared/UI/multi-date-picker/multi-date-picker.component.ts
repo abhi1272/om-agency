@@ -37,7 +37,7 @@ export class MultiDatePickerComponent implements OnInit {
     label: 'Last Month'
   },
   ]
-  datepickerMaxDate = new Date(new Date().setDate(new Date().getDate() + 1))
+  // datepickerMaxDate = new Date(new Date().setDate(new Date().getDate() + 1))
   datepickerConfig = {
     dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue',
     ranges: this.ranges, isAnimated: true, showWeekNumbers: false
