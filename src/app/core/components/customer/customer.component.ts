@@ -143,6 +143,7 @@ export class CustomerComponent implements OnInit {
     value.subscribe((data) => {
       if (data) {
         this.getCustomerData()
+        this.setFilterValue = ''
       }
     })
   }
@@ -159,6 +160,7 @@ export class CustomerComponent implements OnInit {
     value.subscribe((data) => {
       if (data) {
         this.getCustomerData()
+        this.setFilterValue = ''
       }
     })
   }

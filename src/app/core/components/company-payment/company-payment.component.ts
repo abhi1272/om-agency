@@ -87,6 +87,10 @@ export class CompanyPaymentComponent implements OnInit {
     this.dataSource = new MatTableDataSource(filteredData)
   }
 
+  viewCompanyBill(customer_uuid) {
+    this.router.navigate([`/company-bill/${customer_uuid}`, { page: 'company-payment'}])
+  }
+
   // Get Project related functions
 
   public getPaymentData(filter?: any): void {

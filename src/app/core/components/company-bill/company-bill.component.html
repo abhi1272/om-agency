@@ -19,14 +19,14 @@
         <div class="col-4">
           <h3 class="text-muted txtlight px-1">BILLS</h3>
         </div>
-        <h2 class="col-sm-6">
+        <h2 class="col-sm-4">
           Total: {{totalBillAmount | currency: 'INR'}}
         </h2>
-        <!-- <div class="col-sm-2" *ngIf="customerUuid">
+        <div class="col-sm-2" *ngIf="customerUuid">
           <button type="button" (click)="viewCustomerPayment(customerUuid)" class="btn btn-primary">
             View Payment
           </button>
-        </div> -->
+        </div>
         <div class="col-sm-2" *ngIf="customerUuid">
           <button type="button" (click)="openUserDialog()" class="btn btn-primary">
             + BILL
