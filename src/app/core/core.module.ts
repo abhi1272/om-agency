@@ -24,7 +24,8 @@ import { SharedModule } from 'app/shared/shared.module';
 import { ViewSummaryComponent } from './components/view-summary/view-summary.component';
 import { CompanyBillComponent } from './components/company-bill/company-bill.component';
 import { CompanyCreateComponent } from './shared/modals/company-create/company-create.component'
-import { ReportComponent } from 'app/report/report.component'
+import { ReportComponent } from 'app/report/report.component';
+import { PlacesComponent } from './components/places/places.component'
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import { ReportComponent } from 'app/report/report.component'
     ViewSummaryComponent,
     CompanyBillComponent,
     CompanyCreateComponent,
+    PlacesComponent,
   ]
 })
-export class CoreModule {}
+export class CoreModule { }

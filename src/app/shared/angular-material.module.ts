@@ -57,7 +57,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 //
 
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -68,11 +68,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { NgxImageCompressService } from 'ngx-image-compress';
+import { CommonModule } from '@angular/common';
 
 const modules: any[] = [
-  
+
+  CommonModule,
+
   LayoutModule,
-  
+
   MatAutocompleteModule,
   MatCheckboxModule,
   MatDatepickerModule,
@@ -82,14 +86,14 @@ const modules: any[] = [
   MatSelectModule,
   MatSliderModule,
   MatSlideToggleModule,
-  
+
   MatNativeDateModule,
   // MatMomentDateModule,
-  
+
   MatMenuModule,
   MatSidenavModule,
   MatToolbarModule,
-  
+
   MatCardModule,
   MatDividerModule,
   MatExpansionModule,
@@ -98,7 +102,7 @@ const modules: any[] = [
   MatStepperModule,
   MatTabsModule,
   MatTreeModule,
-  
+
   MatButtonModule,
   MatButtonToggleModule,
   MatBadgeModule,
@@ -106,12 +110,12 @@ const modules: any[] = [
   MatIconModule,
   MatProgressSpinnerModule,
   MatProgressBarModule,
-  
+
   MatBottomSheetModule,
   MatDialogModule,
   MatSnackBarModule,
   MatTooltipModule,
-  
+
   MatPaginatorModule,
   MatSortModule,
   MatTableModule
@@ -119,9 +123,14 @@ const modules: any[] = [
 ];
 
 @NgModule({
-  imports: [ ...modules, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule ],
-  exports: [ ...modules ],
-  declarations: []
-  
+  imports: [...modules, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule],
+  exports: [...modules],
+  declarations: [],
+  providers: [
+    NgxImageCompressService,
+    { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+  ]
+
 })
 export class AngularMaterialModule { }

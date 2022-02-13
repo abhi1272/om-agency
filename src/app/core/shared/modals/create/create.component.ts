@@ -36,7 +36,14 @@ export class CreateComponent implements OnInit {
         customer_type: new FormControl('', Validators.required),
         phoneNumber: new FormControl(''),
         notes: new FormControl(''),
-      })
+      });
+      if (this.data.action === 'edit') {
+        this.createForm.patchValue({
+          ...this.data.data,
+          bill_date: this.covertDateFormate(this.data.data.bill_date),
+          payment_date: this.covertDateFormate(this.data.data.payment_date),
+        })
+      }
     } else if (this.data.page === 'payment') {
       this.createForm = new FormGroup({
         payment_date: new FormControl(selectedDefaultDate, Validators.required),
@@ -58,14 +65,15 @@ export class CreateComponent implements OnInit {
         type: new FormControl('', Validators.required),
         notes: new FormControl('', Validators.required),
       })
-    }
-
-    if (this.data.action === 'edit') {
-      this.createForm.patchValue({
-        ...this.data.data,
-        bill_date: this.covertDateFormate(this.data.data.bill_date),
-        payment_date: this.covertDateFormate(this.data.data.payment_date),
-      })
+    } else if (this.data.page === 'place') {
+      this.createForm = new FormGroup({
+        name: new FormControl('', Validators.required)
+      });
+      if (this.data.action === 'edit') {
+        this.createForm.patchValue({
+          name: this.data.data.name
+        })
+      }
     }
   }
 
@@ -79,9 +87,9 @@ export class CreateComponent implements OnInit {
 
   createData(): void {
     this.loading = true
-    // if (this.data.pages === 'customer') {
+    if (this.data.pages === 'customer') {
       this.createForm.value.customer_uuid = this.data.data.uuid
-    // }
+    }
     if (this.data.data && this.data.data.customer_uuid) {
       this.createForm.value.customer_uuid = this.data.data.customer_uuid
     }

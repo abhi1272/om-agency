@@ -6,7 +6,7 @@ import { UsersService } from '../core/services/users.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(public usersService: UsersService) {}
+    constructor(public usersService: UsersService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let error;
@@ -14,7 +14,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             if (err.status === 401) {
                 // auto logout if 401 response returned from api
                 this.usersService.logout();
-                location.reload(true);
+                location.reload();
             }
             error = err.error || err.statusText;
             return throwError(error);
