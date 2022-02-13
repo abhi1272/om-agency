@@ -1,4 +1,4 @@
-<div class="row" *ngIf="!customerData">
+<div class="row hide-table" *ngIf="!customerData">
   <mat-form-field class="col-sm-4" appearance="outline">
     <mat-label>Search Customer/Bill</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Google" #input>
@@ -10,7 +10,7 @@
 </div>
 
 
-<body *ngIf="storeData">
+<body *ngIf="storeData" class="hide-table">
   <div class="myt-5 mt-2 ml-2">
     <div class="row d-flex justify-content-between">
       <div class="col-4">
@@ -32,7 +32,7 @@
     </div>
   </div>
 </body>
-<div class="">
+<div class="hide-table">
   <div class="mat-elevation-z8 hide-table">
     <table mat-table [dataSource]="dataSource" matSort>
 
@@ -145,26 +145,60 @@
   </div>
 </div>
 
-<div class="row show-card" *ngIf="dataSource && dataSource.filteredData">
-  <div class="col-sm-4" *ngFor="let bill of dataSource.filteredData">
-    <mat-card>
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{bill.bill_no}}</mat-card-title>
-        <mat-card-subtitle>{{bill.bill_date != "NaN" && bill.bill_date | date : commonService.dateFormat}}</mat-card-subtitle>
-        <mat-card-subtitle>{{bill.customer?bill.customer.name: bill.customer_name}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <div style="display: row;">
-          <div class="col-sm-12" style="color: teal;">
-           <label class="mb-4">Bill Amount: &nbsp;&nbsp;{{bill.bill_amount}}</label> 
+<div class="show-card" *ngIf="dataSource && dataSource.filteredData">
+  <body *ngIf="storeData">
+    <div style="padding: 15px;">
+      <div>
+        <nav class="row" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item small"><a [routerLink]="['/customer']">Customer</a></li>
+            <li class="breadcrumb-item small">BILLS</li>
+            <li class="breadcrumb-item active small" aria-current="page">{{customerName}} - {{placeName}}</li>
+          </ol>
+        </nav>
+        <div style="display: flex; justify-content: space-between">
+          <h6 style="padding: 8px;">
+            Total: {{totalBillAmount | currency: 'INR' : number: '1.0-0'}}
+          </h6>
+          <div *ngIf="customerUuid">
+            <button mat-stroked-button color="primary" (click)="viewCustomerPayment(customerUuid)">
+              View Payment
+            </button>
+          </div>
+          <div *ngIf="customerUuid">
+            <button mat-stroked-button color="primary" (click)="openUserDialog()">
+              + BILL
+            </button>
           </div>
         </div>
-          <div class="row">
-            <button (click)="edit(bill)" style="margin: 0px 2px" mat-raised-button class="btn-primary col-sm-3 mb-2 mr-1"><span class="material-icons">edit</span> Edit Bill</button>
-            <button (click)="delete(bill)" mat-raised-button class="btn-danger col-sm-3 mb-2 mr-1"><span class="material-icons">delete</span> Delete Bill</button>
-         </div>
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </div>
+  </body>
+  <div class="col-sm-4" *ngFor="let bill of dataSource.filteredData">
+    <div class="customer-card">
+      <div class="row">
+        <div class="col-8">
+          <h6 class="cursor-pointer">{{bill.bill_no}}</h6>  
+        </div>
+        <div class="col-4">
+         <button mat-stroked-button color="primary" [matMenuTriggerFor]="menu">Action</button>
+           <mat-menu #menu="matMenu">
+             <button mat-menu-item (click)="edit(bill)">Edit</button>
+             <button mat-menu-item (click)="delete(bill)">Delete</button>
+             <!-- <button mat-menu-item (click)="addBill(customer)" >Add Payment</button>
+             <button mat-menu-item (click)="viewBill(customer)">View Bill</button>
+             <button mat-menu-item (click)="viewPaymentClickHandler(customer)">View Payment</button>   -->
+           </mat-menu>          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8 card--area">
+           <p>{{bill.bill_date != "NaN" && bill.bill_date | date : commonService.dateFormat}}</p>
+        </div>
+        <div class="col-4 card--dues">
+         <p>{{bill.bill_amount | currency : 'INR' : number: '1.0-0'}}</p>
+      </div>
+      </div>
+    </div>
   </div>
 </div>

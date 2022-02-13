@@ -1,4 +1,4 @@
-<div class="row" *ngIf="!customerData">
+<div class="row hide-table" *ngIf="!customerData">
   <mat-form-field class="col-sm-4" appearance="outline">
     <mat-label>Search Customer</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Google" #input>
@@ -8,7 +8,7 @@
     <input (change)="getPaymentData($event.target.value)" [value]="selectedDate" matInput type="date" [min]="minDate" [max]="maxDate">
   </mat-form-field>
 </div>
-<body *ngIf="dataSource">
+<body *ngIf="dataSource" class="hide-table">
   <div class="layout-main-content-inner">
     <div class="container-fluid">
       <div class="row d-flex justify-content-between mb-2 mt-2 ml-1">
@@ -136,25 +136,57 @@
 
 </body>
 
-<div class="row show-card" *ngIf="dataSource && dataSource.filteredData">
-  <div class="col-sm-4" *ngFor="let payment of dataSource.filteredData">
-    <mat-card>
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-subtitle>{{payment.payment_date != "NaN" && payment.payment_date | date : commonService.dateFormat}}</mat-card-subtitle>
-        <mat-card-subtitle>{{payment.customer?payment.customer.name: payment.customer_name}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <div style="display: row;">
-          <div class="col-sm-12" style="color: teal;">
-           <label class="mb-4">Paid Amount: &nbsp;&nbsp;{{payment.paid_amount}}</label> 
+<div class="show-card" *ngIf="dataSource && dataSource.filteredData">
+  <body *ngIf="dataSource">
+    <div style="padding: 15px;">
+      <div>
+        <nav class="row" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item small"><a [routerLink]="['/customer']">Customer</a></li>
+            <li class="breadcrumb-item small">PAY</li>
+            <!-- <li class="breadcrumb-item active small" aria-current="page">{{customerName}} - {{placeName}}</li> -->
+          </ol>
+        </nav>
+        <div style="display: flex; justify-content: space-between">
+          <h6 style="padding: 8px;">
+            Total: {{totalAmount | currency: 'INR' : number: '1.0-0'}}
+          </h6>
+          <div *ngIf="customerUuid">
+            <button mat-stroked-button color="primary" (click)="viewCustomerBill(customerUuid)">
+              VIEW BILL
+            </button>
+          </div>
+          <div *ngIf="customerUuid">
+            <button mat-stroked-button color="primary" (click)="openUserDialog()">
+              + PAYMENT
+            </button>
           </div>
         </div>
-          <div class="row">
-            <button (click)="edit(payment)" style="margin: 0px 2px" mat-raised-button class="btn-primary col-sm-3 mb-2 mr-1"><span class="material-icons">edit</span> Edit Payment</button>
-            <button (click)="delete(payment)" mat-raised-button class="btn-danger col-sm-3 mb-2 mr-1"><span class="material-icons">delete</span> Delete Payment</button>
-         </div>
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </div>
+  </body>
+  <div class="col-sm-4" *ngFor="let payment of dataSource.filteredData">
+    <div class="customer-card">
+      <div class="row">
+        <div class="col-8">
+          <h6 class="cursor-pointer">{{payment.customer?payment.customer.name: payment.customer_name}}</h6>  
+        </div>
+        <div class="col-4">
+         <button mat-stroked-button color="primary" [matMenuTriggerFor]="menu">Action</button>
+           <mat-menu #menu="matMenu">
+             <button mat-menu-item (click)="edit(payment)">Edit</button>
+             <button mat-menu-item (click)="delete(payment)">Delete</button>
+          </mat-menu>          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8">
+           <p>{{payment.payment_date != "NaN" && payment.payment_date | date : commonService.dateFormat}}</p>
+        </div>
+        <div class="col-4">
+         <p>{{payment.paid_amount | currency : 'INR' : number: '1.0-0'}}</p>
+      </div>
+      </div>
+    </div>
   </div>
 </div>
