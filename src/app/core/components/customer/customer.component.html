@@ -1,4 +1,4 @@
-<div *ngIf="!loading">
+<div *ngIf="!loading" class="hide-table">
   <div class="row">
     <mat-form-field class="col-sm-4" appearance="outline">
       <mat-label>Search Customer</mat-label>
@@ -33,7 +33,7 @@
           + CUSTOMER
         </button>
       </div>
-      <div class="col-sm-1 hide-table">
+      <div class="col-sm-1">
         <button mat-raised-button color="primary" (click)="download()">
           <span class="material-icons">download</span>
         </button>
@@ -43,7 +43,7 @@
 
     </div>
   </body>
-  <div class="mat-elevation-z8 hide-table" #TABLE *ngIf="storeData && storeData.length > 0">
+  <div class="mat-elevation-z8" #TABLE *ngIf="storeData && storeData.length > 0">
     <table mat-table #table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)">
 
       <!-- ID Column -->
@@ -163,51 +163,37 @@
 
 </div>
 
-<div>
-  <div class="row show-card" *ngIf="dataSource && dataSource.filteredData">
-    <div class="col-sm-4" *ngFor="let customer of dataSource.filteredData">
-      <!-- <mat-card class="example-card">
-        <div class="mt-4 ml-2">
-          <h6>{{customer.name}}</h6>
-          <div class="row">
-            <div class="col-8">
-              <p>{{customer.area}}</p>
-            </div>
-            <div class="col-4">
-              <p>{{customer.totalBillAmountLeft | currency:'INR'}}</p>
-            </div>
-          </div>
-        </div>
-      </mat-card> -->
-      <mat-card>
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>{{customer.name}}</mat-card-title>
-          <mat-card-subtitle>{{customer.area}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <div style="display: flex;">
-            <div class="col-sm-6" style="color: teal;">
-            <label>Sale:</label> 
-            <p>
-                {{customer.totalBillAmount}}
-              </p>
-            </div>
-            <div class="col-sm-6" style="color: tomato;">
-              <label> Dues:</label> 
-              <p>
-                {{customer.totalBillAmountLeft}}
-              </p>
-            </div>
-          </div>
-            <div class="row">
-              <button (click)="addPaymentClickHandler(customer)" style="margin: 0px 2px" mat-raised-button class="btn-primary col-sm-3 mb-2 mr-1"><span class="material-icons">add</span>Add Bill</button>
-              <button (click)="addBill(customer)" mat-raised-button class="btn-primary col-sm-3 mb-2 mr-1"><span class="material-icons">add</span>Add Payment</button>
-              <button (click)="viewBill(customer)" mat-raised-button class="btn-success col-sm-3 mb-2 mr-1"><span class="material-icons">visibility</span>View Bill</button>
-              <button (click)="viewPaymentClickHandler(customer)" mat-raised-button class="btn-success col-sm-3"><span class="material-icons">visibility</span>View Payment</button>  
-            </div>
-        </mat-card-content>
-      </mat-card>
+<div class="show-card">
+  <mat-form-field appearance="outline">
+    <mat-label>Search Customer</mat-label>
+    <input matInput autocomplete="off" [value]="setFilterValue || ''" (keyup)="applyFilter($event)" placeholder="Ex. Google" #input>
+  </mat-form-field>
+  <div *ngIf="dataSource && dataSource.filteredData">
+    <div *ngFor="let customer of dataSource.filteredData">
+     <div class="customer-card">
+       <div class="row">
+         <div class="col-8">
+           <h6 class="cursor-pointer">{{customer.name}}</h6>  
+         </div>
+         <div class="col-4">
+          <button mat-stroked-button color="primary" [matMenuTriggerFor]="menu">Action</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="addPaymentClickHandler(customer)">Add Bill</button>
+              <button mat-menu-item (click)="addBill(customer)" >Add Payment</button>
+              <button mat-menu-item (click)="viewBill(customer)">View Bill</button>
+              <button mat-menu-item (click)="viewPaymentClickHandler(customer)">View Payment</button>  
+            </mat-menu>          
+         </div>
+       </div>
+       <div class="row">
+         <div class="col-8 card--area">
+            <p>{{customer.area}}</p>
+         </div>
+         <div class="col-4 card--dues">
+          <p>{{customer.totalBillAmountLeft | currency : 'INR' : number: '1.0-0'}}</p>
+       </div>
+       </div>
+     </div>
     </div>
   </div>
 </div>

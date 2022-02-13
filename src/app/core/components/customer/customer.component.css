@@ -16,7 +16,25 @@ table {
   width: 0px;
 }
 
+.customer-card {
+  padding: 8px 5px 0px 12px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  margin: 18px;
+}
+
+.mat-menu-item{
+  height: 36px !important;
+}
+
+.card--dues{
+  color: red;
+}
+
 @media screen and (min-width: 0px) and (max-width: 800px) {
+  body {
+    line-height: 0.9 !important
+  }
   .show-card { display: block; } 
   .hide-table { display: none;} /* show it on small screens */
 }
