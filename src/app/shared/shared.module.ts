@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MultiDatePickerComponent } from './UI/multi-date-picker/multi-date-picker.component'
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker'
 import { SearchPipe } from './pipes/search.pipe'
+import { CreateComponent } from './modals/create/create.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SearchPipe } from './pipes/search.pipe'
     ColFilterComponent,
     AddRemoveColComponent,
     MultiDatePickerComponent,
-    SearchPipe
+    SearchPipe,
+    CreateComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { SearchPipe } from './pipes/search.pipe'
     AddRemoveColComponent,
     MultiDatePickerComponent,
     SearchPipe,
-    AngularMaterialModule
+    AngularMaterialModule,
+    CreateComponent
   ],
   providers: [MenuItems]
 })
