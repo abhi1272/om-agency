@@ -8,3 +8,10 @@
 .blue{
   color: #1e88e5;
 }
+
+.customer-card {
+  padding: 8px 5px 0px 12px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  margin: 18px;
+}
