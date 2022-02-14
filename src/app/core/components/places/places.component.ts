@@ -55,7 +55,7 @@ export class PlacesComponent implements OnInit {
     })
   }
 
-  sortData() {
+  sortData(ev) {
 
   }
 

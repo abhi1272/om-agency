@@ -64,16 +64,18 @@ export class CreateComponent implements OnInit {
         amount: new FormControl('', Validators.required),
         type: new FormControl('', Validators.required),
         notes: new FormControl('', Validators.required),
-      })
-    } else if (this.data.page === 'place') {
-      this.createForm = new FormGroup({
-        name: new FormControl('', Validators.required)
-      });
-      if (this.data.action === 'edit') {
-        this.createForm.patchValue({
-          name: this.data.data.name
+      }) } else if (this.data.page === 'place') {
+        this.createForm = new FormGroup({
+          name: new FormControl('', Validators.required)
         })
-      }
+    }
+
+    if (this.data.action === 'edit') {
+      this.createForm.patchValue({
+        ...this.data.data,
+        bill_date: this.covertDateFormate(this.data.data.bill_date),
+        payment_date: this.covertDateFormate(this.data.data.payment_date),
+      })
     }
   }
 
