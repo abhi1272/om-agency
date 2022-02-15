@@ -124,10 +124,12 @@ export class CustomerComponent implements OnInit {
   }
 
   viewPaymentClickHandler(row: any): void {
-    this.router.navigate([`/payment/${row.uuid}`, { page: 'customer'}])
+    this.commonService.selectedCustomer = row
+    this.router.navigate([`/payment/${row.uuid}`, { page: 'customer', name: row.name}])
   }
 
   viewBill(row: any): void {
+    this.commonService.selectedCustomer = row
     this.router.navigate([`/bill/${row.uuid}`, { page: 'customer', name: row.name , place: row.area}])
   }
 

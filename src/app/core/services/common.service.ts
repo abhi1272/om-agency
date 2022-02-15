@@ -12,6 +12,7 @@ export class CommonService {
   apiUrl = environment.url
   selectDefaultDate = ''
   dateFormat = 'dd-MM-yyy'
+  selectedCustomer
   constructor(public dialog: MatDialog, public http: HttpClient) { }
 
   openDialog(componentName: any, data: object, width = '550px'): Observable<any> {

@@ -48,7 +48,6 @@ export class PaymentComponent implements OnInit {
     if (this.setDisplayedColumns) {
       this.displayedColumns = this.setDisplayedColumns
     }
-
     if (this.customerData) {
       this.customerUuid = this.customerData.uuid
     } else {

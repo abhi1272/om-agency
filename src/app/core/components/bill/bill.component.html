@@ -146,14 +146,14 @@
 </div>
 
 <div class="show-card" *ngIf="dataSource && dataSource.filteredData">
-  <body *ngIf="storeData">
+  <div *ngIf="storeData">
     <div style="padding: 15px;">
       <div>
-        <nav class="row" aria-label="breadcrumb">
+        <nav class="row ml-0" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item small"><a [routerLink]="['/customer']">Customer</a></li>
             <li class="breadcrumb-item small">BILLS</li>
-            <li class="breadcrumb-item active small" aria-current="page">{{customerName}} - {{placeName}}</li>
+            <li *ngIf="commonService.selectedCustomer" class="breadcrumb-item active small" aria-current="page">{{commonService.selectedCustomer.name}} - {{commonService.selectedCustomer.area}}</li>
           </ol>
         </nav>
         <div style="display: flex; justify-content: space-between">
@@ -173,7 +173,7 @@
         </div>
       </div>
     </div>
-  </body>
+  </div>
   <div class="col-sm-4" *ngFor="let bill of dataSource.filteredData">
     <div class="customer-card">
       <div class="row">
@@ -185,9 +185,6 @@
            <mat-menu #menu="matMenu">
              <button mat-menu-item (click)="edit(bill)">Edit</button>
              <button mat-menu-item (click)="delete(bill)">Delete</button>
-             <!-- <button mat-menu-item (click)="addBill(customer)" >Add Payment</button>
-             <button mat-menu-item (click)="viewBill(customer)">View Bill</button>
-             <button mat-menu-item (click)="viewPaymentClickHandler(customer)">View Payment</button>   -->
            </mat-menu>          
         </div>
       </div>

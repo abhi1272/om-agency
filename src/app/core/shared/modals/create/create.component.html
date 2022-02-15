@@ -72,12 +72,12 @@
             </div>
             <div class="row">
                 <label class="col-sm-4 col-form-label">Amount:</label>
-                <input class="form-control col-sm-6 mb-4" type="{{data.action === 'create' ? 'text' : 'number'}}"
+                <input class="form-control col-sm-6 mb-2" type="{{data.action === 'create' ? 'text' : 'number'}}"
                     placeholder="Enter Amount" formControlName="paid_amount">
             </div>
             <div class="row" *ngIf="data.action === 'create'">
                 <span class="col-sm-4"></span>
-                <small class="text-muted col-sm-6 mb-4">*Add multiple amount with comm like: 100,200</small>
+                <small class="text-muted col-sm-6 mb-2">*Add multiple amount like: 100,200</small>
             </div>
             <div class="row">
                 <label class="col-sm-4 col-form-label">Notes:</label>

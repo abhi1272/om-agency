@@ -178,8 +178,8 @@
          <div class="col-4">
           <button mat-stroked-button color="primary" [matMenuTriggerFor]="menu">Action</button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="addPaymentClickHandler(customer)">Add Bill</button>
-              <button mat-menu-item (click)="addBill(customer)" >Add Payment</button>
+              <button mat-menu-item (click)="addBill(customer)">Add Bill</button>
+              <button mat-menu-item (click)="addPaymentClickHandler(customer)" >Add Payment</button>
               <button mat-menu-item (click)="viewBill(customer)">View Bill</button>
               <button mat-menu-item (click)="viewPaymentClickHandler(customer)">View Payment</button>  
             </mat-menu>          
