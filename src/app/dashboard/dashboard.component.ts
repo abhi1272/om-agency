@@ -63,9 +63,9 @@ export class DashboardComponent implements OnInit, OnChanges {
       start_date : moment().subtract(15, 'days').format('YYYY-MM-DD'),
       end_date : moment().format('YYYY-MM-DD')
     }
-    this.getDayWiseData()
+    // this.getDayWiseData()
     this.getDayTotalData()
-    this.getCustomerData()
+    // this.getCustomerData()
     // this.getPlaceData()
   }
 
@@ -75,12 +75,12 @@ export class DashboardComponent implements OnInit, OnChanges {
       end_date : moment(dateRange[1]).format('YYYY-MM-DD')
     }
     this.preDefinedDateObj = dateObj
-    this.getDayWiseData()
+    // this.getDayWiseData()
   }
 
   public getSelectedDated(event) {
     this.preDefinedDateObj = event
-    this.getDayWiseData()
+    // this.getDayWiseData()
   }
 
   public getDayWiseData() {

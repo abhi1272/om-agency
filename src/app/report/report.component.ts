@@ -64,7 +64,7 @@ export class ReportComponent implements OnInit {
       end_date : moment().format('YYYY-MM-DD')
     }
     this.getDayWiseData()
-    this.getDayTotalData()
+    // this.getDayTotalData()
     this.getCustomerData()
     this.getPlaceData()
   }
