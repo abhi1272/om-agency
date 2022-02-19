@@ -1,9 +1,9 @@
 <div *ngIf="!loading">
     <div class="row">
-        <mat-form-field class="col-sm-4" appearance="outline">
+        <mat-form-field class="col-sm-4" appearance="standard">
             <mat-label>Search Place</mat-label>
-            <input matInput [value]="setFilterValue || ''" placeholder="Ex. Pune" #input>
-        </mat-form-field>
+            <input matInput autocomplete="off" (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+          </mat-form-field>
     </div>
 </div>
 

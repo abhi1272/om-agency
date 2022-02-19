@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core'
+import { UsersService } from 'app/core/services/users.service'
 
 export interface Menu {
   state: string
@@ -26,14 +27,24 @@ const MENUITEMS = [
   },
   { state: 'entity/expense', name: 'Expense', type: 'link', icon: 'money' },
   { state: 'places', name: 'Place', type: 'link', icon: 'home' },
-  // { state: 'entity/place', name: 'Place', type: 'link', icon: 'home' },
+]
 
-  // { state: 'table', name: 'Table', type: 'link', icon: 'store' }
+const USERMENUITEMS = [
+  { state: 'customer', name: 'Customer', type: 'link', icon: 'person' },
+  { state: 'bill', name: 'Bill', type: 'link', icon: 'receipt' },
+  { state: 'payment', name: 'Payment', type: 'link', icon: 'payment' },
 ]
 
 @Injectable()
 export class MenuItems {
+
+  constructor(public userService: UsersService) {}
+
   getMenuitem(): Menu[] {
-    return MENUITEMS
+    if (this.userService.getUser().roleName === 'User') {
+      return USERMENUITEMS
+    } else {
+      return MENUITEMS
+    }
   }
 }

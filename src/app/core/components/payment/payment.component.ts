@@ -110,6 +110,7 @@ export class PaymentComponent implements OnInit {
       this.selectedDate = filter
     }
     if (this.selectedDate) {
+      this.commonService.selectedCustomer = {}
       this.billService.getPaymentsByDate(this.selectedDate, 'Sale').subscribe((data) => {
         this.storedData = data.data
         this.storedData = this.storedData.filter((pay: { customer: { type: string } }) => pay.customer.type !== 'company')

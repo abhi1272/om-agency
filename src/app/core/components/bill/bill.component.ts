@@ -126,6 +126,7 @@ checkboxLabel(row?: any): string {
         this.selectedDate = filter
     }
     if (this.selectedDate) {
+      this.commonService.selectedCustomer = {}
       this.billService.getBillsByDate(this.selectedDate, this.type).subscribe((data) => {
         this.storeData = data.data
         this.storeData = this.storeData.filter((bill: { customer: { type: string } }) => bill.customer.type !== 'company')
