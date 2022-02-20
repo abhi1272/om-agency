@@ -27,7 +27,6 @@ import { CompanyCreateComponent } from './shared/modals/company-create/company-c
 import { ReportComponent } from 'app/report/report.component';
 import { PlacesComponent } from './components/places/places.component';
 import { UsersComponent } from './components/users/users.component';
-import { MatCustomDialogComponent } from './shared/mat-custom-dialog/mat-custom-dialog.component';
 import { ActionButtonsComponent } from './shared/mat-custom-table/action-buttons/action-buttons.component'
 
 @NgModule({
@@ -57,7 +56,6 @@ import { ActionButtonsComponent } from './shared/mat-custom-table/action-buttons
     CompanyCreateComponent,
     PlacesComponent,
     UsersComponent,
-    MatCustomDialogComponent,
     ActionButtonsComponent,
   ]
 })
