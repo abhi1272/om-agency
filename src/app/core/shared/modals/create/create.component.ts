@@ -64,10 +64,21 @@ export class CreateComponent implements OnInit {
         amount: new FormControl('', Validators.required),
         type: new FormControl('', Validators.required),
         notes: new FormControl('', Validators.required),
-      }) } else if (this.data.page === 'place') {
-        this.createForm = new FormGroup({
-          name: new FormControl('', Validators.required)
-        })
+      })
+    } else if (this.data.page === 'place') {
+      this.createForm = new FormGroup({
+        name: new FormControl('', Validators.required)
+      })
+    } else if (this.data.page === "user") {
+      this.getPlaceData();
+      this.createForm = new FormGroup({
+        firstName: new FormControl('', Validators.required),
+        lastName: new FormControl(''),
+        email: new FormControl('', Validators.required),
+        mobileNumber: new FormControl(''),
+        password: new FormControl('', Validators.required),
+        place: new FormControl('', Validators.required)
+      });
     }
 
     if (this.data.action === 'edit') {
@@ -181,8 +192,10 @@ export class CreateComponent implements OnInit {
           name: item.name,
           uuid: item.uuid
         }
-      })
-      console.log(this.places)
+      });
+      if (this.data.page === "user") {
+        this.createForm.patchValue({ place: [this.places[0]] })
+      }
     }, (error) => {
       console.log(error)
     })

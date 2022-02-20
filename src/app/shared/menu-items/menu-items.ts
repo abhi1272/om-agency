@@ -27,7 +27,9 @@ const MENUITEMS = [
   },
   { state: 'entity/expense', name: 'Expense', type: 'link', icon: 'money' },
   { state: 'places', name: 'Place', type: 'link', icon: 'home' },
+  { state: 'users', name: 'User', type: 'link', icon: 'users' }
 ]
+// { state: 'entity/place', name: 'Place', type: 'link', icon: 'home' },
 
 const USERMENUITEMS = [
   { state: 'customer', name: 'Customer', type: 'link', icon: 'person' },
@@ -38,7 +40,7 @@ const USERMENUITEMS = [
 @Injectable()
 export class MenuItems {
 
-  constructor(public userService: UsersService) {}
+  constructor(public userService: UsersService) { }
 
   getMenuitem(): Menu[] {
     if (this.userService.getUser().roleName === 'User') {

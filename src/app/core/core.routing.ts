@@ -10,6 +10,7 @@ import { CreateTableComponent } from './components/create-table/create-table.com
 import { ViewSummaryComponent } from './components/view-summary/view-summary.component'
 import { CompanyBillComponent } from './components/company-bill/company-bill.component'
 import { PlacesComponent } from './components/places/places.component'
+import { UsersComponent } from './components/users/users.component'
 
 export const CoreRoutes: Routes = [
   {
@@ -75,5 +76,9 @@ export const CoreRoutes: Routes = [
   {
     path: 'places',
     component: PlacesComponent
+  },
+  {
+    path: 'users',
+    component: UsersComponent
   }
 ]

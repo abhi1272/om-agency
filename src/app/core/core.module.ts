@@ -25,7 +25,10 @@ import { ViewSummaryComponent } from './components/view-summary/view-summary.com
 import { CompanyBillComponent } from './components/company-bill/company-bill.component';
 import { CompanyCreateComponent } from './shared/modals/company-create/company-create.component'
 import { ReportComponent } from 'app/report/report.component';
-import { PlacesComponent } from './components/places/places.component'
+import { PlacesComponent } from './components/places/places.component';
+import { UsersComponent } from './components/users/users.component';
+import { MatCustomDialogComponent } from './shared/mat-custom-dialog/mat-custom-dialog.component';
+import { ActionButtonsComponent } from './shared/mat-custom-table/action-buttons/action-buttons.component'
 
 @NgModule({
   imports: [
@@ -53,6 +56,9 @@ import { PlacesComponent } from './components/places/places.component'
     CompanyBillComponent,
     CompanyCreateComponent,
     PlacesComponent,
+    UsersComponent,
+    MatCustomDialogComponent,
+    ActionButtonsComponent,
   ]
 })
 export class CoreModule { }

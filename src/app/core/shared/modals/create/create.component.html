@@ -188,7 +188,58 @@
         <button mat-button [disabled]="!createForm.valid || loading" type="button" (click)="submit()"
             class="btn btn-primary">Save</button>
     </div>
-  </form>
+</form>
+
+<form [formGroup]="createForm" *ngIf="data.page === 'user'">
+    <div mat-dialog-title class="row">
+        <h3 class="col-sm-11">{{data.title}}</h3>
+    </div>
+    <hr>
+    <div mat-dialog-content style="margin-top: 2%;">
+        <mat-card-content>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="First name" formControlName="firstName" name="firstName" required>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Last name" formControlName="lastName" name="lastName">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Email" formControlName="email" name="email" type="email" required>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Mobile number" formControlName="mobileNumber" name="mobileNumber">
+            </mat-form-field>
+            <!-- <mat-form-field class="example-full-width">
+                <input matInput placeholder="Organization name" formControlName="organizations" name="organizations"
+                    required>
+            </mat-form-field> -->
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password" type="password" formControlName="password" name="password"
+                    required>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-select-trigger>
+                    {{place ? place[0] : ''}}
+                    <span *ngIf="place?.length > 1" class="example-additional-selection">
+                        (+{{place.length - 1}} {{place?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                </mat-select-trigger>
+                <mat-select placeholder="Place" name="type" formControlName="place" [compareWith]="compareFn" multiple>
+                    <mat-option *ngFor="let place of places" [value]="place">
+                        {{place.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-card-content>
+
+    </div>
+    <!-- <hr> -->
+    <div mat-dialog-actions class="float-right mb-1">
+        <button type="button" mat-button mat-dialog-close class="btn btn-light mr-4" data-dismiss="modal">Close</button>
+        <button mat-button [disabled]="!createForm.valid || loading" type="button" (click)="submit()"
+            class="btn btn-primary">Save</button>
+    </div>
+</form>
 
 <form *ngIf="data.page === 'confirm'">
     <div mat-dialog-content>
