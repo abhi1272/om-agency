@@ -28,7 +28,7 @@ import { ReportComponent } from 'app/report/report.component';
 import { PlacesComponent } from './components/places/places.component';
 import { UsersComponent } from './components/users/users.component';
 import { ActionButtonsComponent } from './shared/mat-custom-table/action-buttons/action-buttons.component'
-
+import { MatCustomTableComponent } from './shared/mat-custom-table/mat-custom-table.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -56,6 +56,7 @@ import { ActionButtonsComponent } from './shared/mat-custom-table/action-buttons
     CompanyCreateComponent,
     PlacesComponent,
     UsersComponent,
+    MatCustomTableComponent,
     ActionButtonsComponent,
   ]
 })

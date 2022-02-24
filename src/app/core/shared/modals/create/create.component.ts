@@ -74,6 +74,7 @@ export class CreateComponent implements OnInit {
       this.createForm = new FormGroup({
         firstName: new FormControl('', Validators.required),
         lastName: new FormControl(''),
+        userName: new FormControl('', Validators.required),
         email: new FormControl('', Validators.required),
         mobileNumber: new FormControl(''),
         password: new FormControl('', Validators.required),
@@ -153,15 +154,27 @@ export class CreateComponent implements OnInit {
   }
 
   editData(): void {
-    this.commonService.editData(this.data.page, this.data.data.uuid, this.createForm.value).subscribe((data) => {
-      this.toast.success('Update successful')
-      this.dialogRef.close(true)
-      this.loading = true
-    }, (error) => {
-      this.toast.error(error)
-      this.loading = true
-      this.dialogRef.close(false)
-    })
+    if (this.data.page === 'user') {
+      this.commonService.updateData(this.data.page, this.data.data.uuid, this.createForm.value).subscribe((data) => {
+        this.toast.success('Update successful')
+        this.dialogRef.close(true)
+        this.loading = true
+      }, (error) => {
+        this.toast.error(error)
+        this.loading = true
+        this.dialogRef.close(false)
+      })
+    } else {
+      this.commonService.editData(this.data.page, this.data.data.uuid, this.createForm.value).subscribe((data) => {
+        this.toast.success('Update successful')
+        this.dialogRef.close(true)
+        this.loading = true
+      }, (error) => {
+        this.toast.error(error)
+        this.loading = true
+        this.dialogRef.close(false)
+      })
+    }
   }
 
   public covertDateIntoTimeStamp = (date: any) => {
