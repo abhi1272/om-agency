@@ -21,13 +21,11 @@ export class RegisterComponent implements OnInit {
   createForm() {
     this.registerForm = new FormGroup({
       firstName: new FormControl(''),
-      lastName : new FormControl(''),
       email: new FormControl(''),
-      mobileNumber: new FormControl(''), 
       organizations: new FormControl(''),
       password: new FormControl('')
     })
-  };
+  }
 
   get getFormControl() { return this.registerForm.controls; }
 

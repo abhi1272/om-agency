@@ -78,6 +78,10 @@ export const CoreRoutes: Routes = [
     component: PlacesComponent
   },
   {
+    path: 'category',
+    component: PlacesComponent
+  },
+  {
     path: 'users',
     component: UsersComponent
   }

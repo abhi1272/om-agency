@@ -24,10 +24,10 @@ import { SharedModule } from 'app/shared/shared.module';
 import { ViewSummaryComponent } from './components/view-summary/view-summary.component';
 import { CompanyBillComponent } from './components/company-bill/company-bill.component';
 import { CompanyCreateComponent } from './shared/modals/company-create/company-create.component'
-import { ReportComponent } from 'app/report/report.component';
-import { PlacesComponent } from './components/places/places.component';
 import { UsersComponent } from './components/users/users.component';
 import { ActionButtonsComponent } from './shared/mat-custom-table/action-buttons/action-buttons.component'
+import { PlacesComponent } from './components/places/places.component'
+import { NotFoundComponent } from './components/not-found/not-found.component'
 
 @NgModule({
   imports: [
@@ -57,6 +57,7 @@ import { ActionButtonsComponent } from './shared/mat-custom-table/action-buttons
     PlacesComponent,
     UsersComponent,
     ActionButtonsComponent,
+    NotFoundComponent,
   ]
 })
 export class CoreModule { }

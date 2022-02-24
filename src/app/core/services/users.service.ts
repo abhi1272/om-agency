@@ -25,6 +25,9 @@ export class UsersService {
     return this.http.get(`${this.apiUrl}/organization/${uuid}`)
   }
 
+  getOrgDataByName(name: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/organization/${name}`)
+  }
   signUp(user: Object) {
     return this.http.post(`${this.apiUrl}/user/signup`, user)
       .pipe(map(({ data }: any) => {

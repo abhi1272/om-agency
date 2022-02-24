@@ -1,10 +1,10 @@
 <div class="report">
     <div class="row mb-2 ml-2">
-        <div class="col-sm-1">
+        <div class="col-sm-1 col-xs-6">
             <button mat-raised-button [ngClass]="{'btn-primary': dateType === 'daily'}"
                 (click)="getDayWiseData()">Daily</button>
         </div>
-        <div class="col-sm-1">
+        <div class="col-sm-1 col-xs-6">
             <button mat-raised-button [ngClass]="{'btn-primary': dateType === 'monthly'}"
                 (click)="getMonthlyData()">Monthly</button>
         </div>

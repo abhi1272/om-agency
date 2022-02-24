@@ -1,23 +1,28 @@
-import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { UsersService } from '../core/services/users.service';
+import { Injectable } from '@angular/core'
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http'
+import { Observable, throwError } from 'rxjs'
+import { catchError } from 'rxjs/operators'
+import { UsersService } from '../core/services/users.service'
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
     constructor(public usersService: UsersService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let error;
-        return next.handle(request).pipe(catchError(err => {
-            if (err.status === 401) {
-                // auto logout if 401 response returned from api
-                this.usersService.logout();
-                location.reload();
-            }
-            error = err.error || err.statusText;
-            return throwError(error);
-        }));
-    }
+        return next.handle(request)
+          .pipe(
+            catchError((error: HttpErrorResponse) => {
+              let errorMsg = ''
+              if (error.error instanceof ErrorEvent) {
+                console.log('this is client side error')
+                errorMsg = `Error: ${error.error.message}`
+              } else {
+                console.log('this is server side error')
+                errorMsg = `${error.error.message}`
+              }
+              console.log(errorMsg)
+              return throwError(errorMsg)
+            })
+          )
+      }
 }

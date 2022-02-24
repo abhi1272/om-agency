@@ -4,6 +4,7 @@ import { AuthGuard } from './guard/auth.guard'
 import { FullComponent } from './layouts/full/full.component'
 import { LoginComponent } from './core/components/users/login/login.component'
 import { RegisterComponent } from './core/components/users/register/register.component'
+import {NotFoundComponent} from './core/components/not-found/not-found.component'
 
 export const AppRoutes: Routes = [
   {
@@ -41,5 +42,9 @@ export const AppRoutes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent
   }
 ]

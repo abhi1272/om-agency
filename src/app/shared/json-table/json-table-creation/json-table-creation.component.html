@@ -38,7 +38,7 @@
           <h2 class="text-muted txtlight"><b>{{apiResultData.length}}</b> {{sharedService.roleName}}</h2>
         </div>
         <div class="col-sm-3 text-right mb-2 hide-table">
-          <button type="button" class="btn btn-primary">
+          <button type="button" class="btn btn-primary" (click)="add(configData.page_key, configData.page_name)">
             + {{sharedService.roleName | uppercase}}
           </button>
         </div>
