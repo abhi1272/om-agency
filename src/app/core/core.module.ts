@@ -29,6 +29,7 @@ import { ActionButtonsComponent } from './shared/mat-custom-table/action-buttons
 import { PlacesComponent } from './components/places/places.component'
 import { NotFoundComponent } from './components/not-found/not-found.component'
 
+import { MatCustomTableComponent } from './shared/mat-custom-table/mat-custom-table.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -56,6 +57,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component'
     CompanyCreateComponent,
     PlacesComponent,
     UsersComponent,
+    MatCustomTableComponent,
     ActionButtonsComponent,
     NotFoundComponent,
   ]

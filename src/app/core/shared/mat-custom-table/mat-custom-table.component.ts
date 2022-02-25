@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,7 +13,8 @@ import { CreateComponent } from 'app/core/shared/modals/create/create.component'
 })
 export class MatCustomTableComponent implements OnInit {
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   @Output() action: EventEmitter<any> = new EventEmitter<any>();
   @Output() refreshData: EventEmitter<any> = new EventEmitter<any>();
   @Input() columns: Array<any>;
@@ -21,15 +22,15 @@ export class MatCustomTableComponent implements OnInit {
   @Input() showCheckBox: boolean = false;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @Input() dialogData: any = {};
-  dataSource: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
+  dataSource: MatTableDataSource<any>;
+
   displayedColumns: string[] = [];
   value: string;
 
   constructor(private commonService: CommonService) { }
 
   ngOnInit(): void {
-    console.log(this.dataset, "hello")
     // set checkbox column
     // this.displayedColumns.push("select");
 
@@ -37,11 +38,9 @@ export class MatCustomTableComponent implements OnInit {
     this.displayedColumns = this.displayedColumns.concat(this.columns.map(x => x.columnDef));    // pre-fix static
 
     // add action column
+    this.displayedColumns.unshift("id")
     this.displayedColumns.push("action");
     this.dataSource = new MatTableDataSource<any>(this.dataset);
-
-    // set pagination
-    this.dataSource.paginator = this.paginator;
   }
 
   onTableAction(e: any): void {
@@ -76,6 +75,7 @@ export class MatCustomTableComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(event: Event) {

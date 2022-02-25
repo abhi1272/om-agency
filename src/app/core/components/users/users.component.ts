@@ -11,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
 export class UsersComponent implements OnInit {
 
   columns = [
-    { columnDef: 'id', header: 'ID' },
     { columnDef: 'firstName', header: 'Name' }
   ]
   data: any[] = [];
@@ -34,9 +33,8 @@ export class UsersComponent implements OnInit {
 
   getUserPlace() {
     this.commonService.getEntityData('user')
-      .subscribe(({ data }) => {
-        this.data = data;
-        console.log(data);
+      .subscribe((data) => {
+        this.data = data.data;
       }, error => {
         console.log(error);
       })
