@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  // url: 'https://om-agency-bk.vercel.app/api/v1'
+  url: 'https://om-agency-bk.vercel.app/api/v1'
   // url: 'https://api.pocketkhata.com/api/v1'
-  url: 'http://localhost:4000/api/v1'
+  // url: 'http://localhost:4000/api/v1'
 }
 
 
