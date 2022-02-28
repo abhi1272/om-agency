@@ -25,7 +25,7 @@ const MENUITEMS = [
       { state: 'company-payment', name: 'Payment', type: 'link', icon: 'payment' },
     ]
   },
-  { state: 'entity/expense', name: 'Expense', type: 'link', icon: 'money' },
+  { state: 'expense', name: 'Expense', type: 'link', icon: 'money' },
   {
     state: 'manage', name: 'Manage', type: 'link', icon: 'manage_accounts', subMenu: [
       { state: 'places', name: 'Place', type: 'link', icon: 'home' },
@@ -52,7 +52,7 @@ export class MenuItems {
 
   getMenuitem(): Menu[] {
     if (this.userService.getUser().roleName === 'User') {
-      return MENUITEMS
+      return USERMENUITEMS
     } else {
       return MENUITEMS
     }

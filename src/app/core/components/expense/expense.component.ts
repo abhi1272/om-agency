@@ -12,29 +12,17 @@ import { capitalizeFirstLetter } from '../../../helper/helper'
 })
 export class ExpenseComponent implements OnInit {
 
-  constructor(public sharedService: SharedService, private activatedRoute: ActivatedRoute,
-              public router: Router) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false
+  constructor() {
   }
-  configData: any
-  entity
+  columns = [
+    { columnDef: 'type', header: 'Type' , object : true},
+    { columnDef: 'amount', header: 'Amount' },
+    { columnDef: 'date', header: 'Date' , date : true},
+  ]
 
   ngOnInit(): void {
-    console.log(this.activatedRoute.params)
-    this.activatedRoute.params.subscribe((data) => {
-      this.entity = data.name
-      this.sharedService.roleName = capitalizeFirstLetter(data.name)
-    })
-    this.getConfigData()
+
   }
 
-  getConfigData(): void {
-    this.sharedService.getTableConfig(this.entity).subscribe((data) => {
-      this.configData = data.data[0]
-      console.log(this.configData)
-    }, (error) => {
-      console.log(error)
-    })
-  }
 }
 

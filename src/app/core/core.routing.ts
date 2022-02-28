@@ -11,6 +11,7 @@ import { ViewSummaryComponent } from './components/view-summary/view-summary.com
 import { CompanyBillComponent } from './components/company-bill/company-bill.component'
 import { PlacesComponent } from './components/places/places.component'
 import { UsersComponent } from './components/users/users.component'
+import { CategoryComponent } from './components/category/category.component'
 
 export const CoreRoutes: Routes = [
   {
@@ -66,10 +67,6 @@ export const CoreRoutes: Routes = [
     component: ExpenseComponent
   },
   {
-    path: 'entity/:name',
-    component: ExpenseComponent
-  },
-  {
     path: 'table',
     component: CreateTableComponent
   },
@@ -79,7 +76,7 @@ export const CoreRoutes: Routes = [
   },
   {
     path: 'category',
-    component: PlacesComponent
+    component: CategoryComponent
   },
   {
     path: 'users',

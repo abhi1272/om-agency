@@ -30,6 +30,7 @@ import { PlacesComponent } from './components/places/places.component'
 import { NotFoundComponent } from './components/not-found/not-found.component'
 
 import { MatCustomTableComponent } from './shared/mat-custom-table/mat-custom-table.component';
+import { CategoryComponent } from './components/category/category.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -60,6 +61,7 @@ import { MatCustomTableComponent } from './shared/mat-custom-table/mat-custom-ta
     MatCustomTableComponent,
     ActionButtonsComponent,
     NotFoundComponent,
+    CategoryComponent,
   ]
 })
 export class CoreModule { }

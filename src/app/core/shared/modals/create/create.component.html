@@ -139,7 +139,7 @@
             <div class="row">
                 <label class="col-sm-4 col-form-label">Date:</label>
                 <input type="date" class="form-control col-sm-6 mb-4" placeholder="Enter Date"
-                    formControlName="expenses_date">
+                    formControlName="date">
             </div>
             <div class="row">
                 <label class="col-sm-4 col-form-label">Amount:</label>
@@ -169,7 +169,7 @@
             class="btn btn-primary">Save</button>
     </div>
 </form>
-<form [formGroup]="createForm" *ngIf="data.page === 'place'">
+<form [formGroup]="createForm" *ngIf="data.page === 'place' || data.page === 'category'">
     <div mat-dialog-title class="row">
         <h3 class="col-sm-11">{{data.title}}</h3>
     </div>

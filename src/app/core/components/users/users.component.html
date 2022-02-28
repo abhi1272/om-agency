@@ -1,5 +1,2 @@
-<div *ngIf="data.length">
-    <app-mat-custom-table (action)="onTableAction($event)" [dataset]="data" [columns]="columns"
-        (refreshData)="getUserPlace()" [dialogData]="dialogData">
-    </app-mat-custom-table>
-</div>
+<app-mat-custom-table [columns]="columns" [entity]="'user'" [entityName]="'User'">
+</app-mat-custom-table>

@@ -36,7 +36,7 @@ export class CreateComponent implements OnInit {
         customer_type: new FormControl('', Validators.required),
         phoneNumber: new FormControl(''),
         notes: new FormControl(''),
-      });
+      })
       if (this.data.action === 'edit') {
         this.createForm.patchValue({
           ...this.data.data,
@@ -60,17 +60,16 @@ export class CreateComponent implements OnInit {
     } else if (this.data.page === 'expense') {
       this.getCategoryData()
       this.createForm = new FormGroup({
-        expenses_date: new FormControl('', Validators.required),
+        date: new FormControl('', Validators.required),
         amount: new FormControl('', Validators.required),
         type: new FormControl('', Validators.required),
         notes: new FormControl('', Validators.required),
       })
-    } else if (this.data.page === 'place') {
+    } else if (this.data.page === 'place' || this.data.page === 'category') {
       this.createForm = new FormGroup({
         name: new FormControl('', Validators.required)
       })
-    } else if (this.data.page === "user") {
-      this.getPlaceData();
+    } else if (this.data.page === 'user') {
       this.createForm = new FormGroup({
         firstName: new FormControl('', Validators.required),
         lastName: new FormControl(''),
@@ -79,7 +78,7 @@ export class CreateComponent implements OnInit {
         mobileNumber: new FormControl(''),
         password: new FormControl('', Validators.required),
         place: new FormControl('', Validators.required)
-      });
+      })
     }
 
     if (this.data.action === 'edit') {
@@ -154,17 +153,6 @@ export class CreateComponent implements OnInit {
   }
 
   editData(): void {
-    if (this.data.page === 'user') {
-      this.commonService.updateData(this.data.page, this.data.data.uuid, this.createForm.value).subscribe((data) => {
-        this.toast.success('Update successful')
-        this.dialogRef.close(true)
-        this.loading = true
-      }, (error) => {
-        this.toast.error(error)
-        this.loading = true
-        this.dialogRef.close(false)
-      })
-    } else {
       this.commonService.editData(this.data.page, this.data.data.uuid, this.createForm.value).subscribe((data) => {
         this.toast.success('Update successful')
         this.dialogRef.close(true)
@@ -174,7 +162,6 @@ export class CreateComponent implements OnInit {
         this.loading = true
         this.dialogRef.close(false)
       })
-    }
   }
 
   public covertDateIntoTimeStamp = (date: any) => {
@@ -205,8 +192,8 @@ export class CreateComponent implements OnInit {
           name: item.name,
           uuid: item.uuid
         }
-      });
-      if (this.data.page === "user") {
+      })
+      if (this.data.page === 'user') {
         this.createForm.patchValue({ place: [this.places[0]] })
       }
     }, (error) => {
