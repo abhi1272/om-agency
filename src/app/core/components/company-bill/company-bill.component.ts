@@ -18,7 +18,7 @@ import { CompanyCreateComponent } from 'app/core/shared/modals/company-create/co
 export class CompanyBillComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['select' , 'id', 'bill_no', 'bill_amount', 'customer_name' , 'date', 'trDate', 'due_date', 'bill_amount_left', 'payment', 'edit', 'delete']
+  displayedColumns: string[] = ['select' , 'id', 'bill_no', 'bill_amount', 'customer_name' , 'date', 'trDate', 'due_date', 'payment', 'edit', 'delete']
   customerUuid: any
   dataSource!: MatTableDataSource<any>
   storeData: any = []
