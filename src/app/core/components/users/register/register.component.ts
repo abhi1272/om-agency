@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { UsersService } from 'app/core/services/users.service';
+import { Component, OnInit } from '@angular/core'
+import { FormControl, FormGroup } from '@angular/forms'
+import { UsersService } from 'app/core/services/users.service'
+import { ToastrService } from 'ngx-toastr'
 
 @Component({
   selector: 'app-register',
@@ -9,36 +10,38 @@ import { UsersService } from 'app/core/services/users.service';
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm: any;
+  registerForm: any
 
-  constructor(private usersService: UsersService) {
+  constructor(private usersService: UsersService, public toast: ToastrService) {
   }
 
   ngOnInit(): void {
-    this.createForm();
+    this.createForm()
   }
 
   createForm() {
     this.registerForm = new FormGroup({
-      firstName: new FormControl(''),
+      name: new FormControl(''),
       email: new FormControl(''),
-      organizations: new FormControl(''),
+      orgName: new FormControl(''),
       password: new FormControl('')
     })
   }
 
-  get getFormControl() { return this.registerForm.controls; }
+  get getFormControl() { return this.registerForm.controls }
 
   onSubmit() {
     if (!this.registerForm.valid) {
-      return false;
+      return false
     }
-    const formValues = { ...this.registerForm.value, organizations: [{ name: this.registerForm.value.organizations }] };
-    this.usersService.signUp(formValues)  
+    const formValues = { ...this.registerForm.value}
+    this.usersService.signUp(formValues)
       .subscribe(data => {
-        console.log(data);
+        this.toast.success('successfully registered!')
+        console.log(data)
       }, error => {
-        console.log(error);
-      });
+        this.toast.success(error)
+        console.log(error)
+      })
   }
 }
